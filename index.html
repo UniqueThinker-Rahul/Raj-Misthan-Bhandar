@@ -206,21 +206,18 @@
             >Experience the royal taste of tradition in every bite.</span
           >
         </p>
-        <div
-          class="flex flex-col sm:flex-row items-center justify-center gap-6"
-        >
-          <button
-            class="gold-border w-full sm:w-auto px-10 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-transform hover:scale-105"
-          >
-            <span class="material-symbols-outlined">call</span>
-            Call Now
+         <div class="flex items-center gap-4">
+          <div id="shopBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 glass rounded-full border-white/5">
+              <span class="size-2 rounded-full bg-whatsapp animate-pulse"></span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-slate-300">Open Now</span>
+          </div>
+          <button onclick="toggleCart()" class="relative glass size-11 rounded-xl flex items-center justify-center hover:border-gold transition-all">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span id="cartBadge" class="absolute -top-1 -right-1 size-5 bg-primary text-[10px] font-black flex items-center justify-center rounded-full text-white hidden">0</span>
           </button>
-          <button
-            class="bg-[#25D366] hover:bg-[#128C7E] w-full sm:w-auto px-10 py-5 rounded-xl font-bold text-lg text-white flex items-center justify-center gap-3 shadow-xl shadow-[#25D366]/20 transition-transform hover:scale-105"
-          >
-            <span class="material-symbols-outlined text-fill-1">chat</span>
-            Order on WhatsApp
-          </button>
+          <a href="tel:9587969804" class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/30 hidden sm:block uppercase">
+            Call Shop
+          </a>
         </div>
       </div>
       <div

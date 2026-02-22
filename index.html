@@ -1,0 +1,1256 @@
+<!doctype html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Raj Misthan Bhandar | Premium Indian Sweets &amp; Snacks</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;900&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#da0b0b",
+              gold: "#D4AF37",
+              "gold-light": "#F9E498",
+              "background-light": "#f8f5f5",
+              "background-dark": "#1a0a0a",
+              "card-dark": "#2a1515",
+            },
+            fontFamily: {
+              display: ["Work Sans", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.5rem",
+              lg: "1rem",
+              xl: "1.5rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      .glass {
+        background: rgba(42, 21, 21, 0.6);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(212, 175, 55, 0.2);
+      }
+      .motif-bg {
+        background-image: radial-gradient(#da0b0b15 1px, transparent 1px);
+        background-size: 20px 20px;
+      }
+      .gold-text {
+        background: linear-gradient(to right, #d4af37, #f9e498, #d4af37);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+      .gold-border {
+        border: 1px solid transparent;
+        background:
+          linear-gradient(#2a1515, #2a1515) padding-box,
+          linear-gradient(to right, #d4af37, #f9e498) border-box;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 overflow-x-hidden"
+  >
+  <!-- Side Shopping Cart Panel -->
+    <div id="cartPanel" class="fixed inset-0 z-[100] hidden">
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md" onclick="toggleCart()"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-card-dark shadow-2xl cart-panel border-l border-gold/20 flex flex-col">
+            <div class="p-8 border-b border-white/5 flex justify-between items-center">
+                <h2 class="text-2xl font-black text-white uppercase tracking-tighter">Your Order</h2>
+                <button onclick="toggleCart()" class="size-10 flex items-center justify-center rounded-full hover:bg-white/5 transition-colors text-white">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div id="cartItems" class="flex-1 overflow-y-auto p-8 space-y-6 no-scrollbar">
+                <p class="text-slate-500 text-center py-20 italic">Your cart is empty...</p>
+            </div>
+            <div class="p-8 border-t border-white/5 bg-background-dark/50">
+                <div class="flex justify-between items-center mb-8">
+                    <span class="text-slate-400 font-bold uppercase text-xs tracking-widest">Subtotal</span>
+                    <span id="cartTotal" class="text-3xl font-black text-gold">₹0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-whatsapp py-5 rounded-xl font-black text-white flex items-center justify-center gap-3 hover:scale-[1.02] active:scale-95 transition-all shadow-xl shadow-whatsapp/20 uppercase tracking-widest text-sm">
+                    <span class="material-symbols-outlined">shopping_cart_checkout</span>
+                    Send Order to WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Top Navigation -->
+    <header class="fixed top-0 w-full z-50 glass border-b border-primary/20">
+      <div
+        class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-3">
+          <div
+            class="size-10 bg-primary rounded-lg flex items-center justify-center text-white shadow-lg shadow-primary/20"
+          >
+            <span class="material-symbols-outlined text-2xl">restaurant</span>
+          </div>
+          <div>
+            <h1
+              class="text-xl font-black tracking-tight leading-none dark:text-slate-100"
+            >
+              RAJ MISTHAN
+            </h1>
+            <p
+              class="text-[10px] uppercase tracking-[0.2em] text-gold font-bold"
+            >
+              Bhandar • Since 1985
+            </p>
+          </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-10">
+          <a
+            class="text-sm font-semibold hover:text-primary transition-colors"
+            href="index.html"
+            >Home</a
+          >
+          <a
+            class="text-sm font-semibold hover:text-primary transition-colors"
+            href="menu.html"
+            >Menu</a
+          >
+          <a
+            class="text-sm font-semibold hover:text-primary transition-colors"
+            href="catering.html"
+            >Catering</a
+          >
+          <a
+            class="text-sm font-semibold hover:text-primary transition-colors"
+            href="gallery.html"
+            >Gallery</a
+          >
+          <a
+            class="text-sm font-semibold hover:text-primary transition-colors"
+            href="contact.html"
+            >Contact</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <div id="shopBadge" class="hidden md:flex items-center gap-2 px-3 py-1.5 glass rounded-full border-white/5">
+              <span class="size-2 rounded-full bg-whatsapp animate-pulse"></span>
+              <span class="text-[10px] font-black uppercase tracking-widest text-slate-300">Open Now</span>
+          </div>
+          <button onclick="toggleCart()" class="relative glass size-11 rounded-xl flex items-center justify-center hover:border-gold transition-all">
+            <span class="material-symbols-outlined">shopping_bag</span>
+            <span id="cartBadge" class="absolute -top-1 -right-1 size-5 bg-primary text-[10px] font-black flex items-center justify-center rounded-full text-white hidden">0</span>
+          </button>
+          <a href="tel:9587969804" class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/30 hidden sm:block uppercase">
+            Call Shop
+          </a>
+        </div>
+        <!-- <div class="flex items-center gap-4">
+          <button
+            class="bg-primary hover:bg-red-700 text-white px-6 py-2.5 rounded-xl text-sm font-bold transition-all shadow-lg shadow-primary/30"
+          >
+            Order Now
+          </button>
+        </div> -->
+      </div>
+    </header>
+    <!-- Hero Section -->
+    <section
+      class="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      <div class="absolute inset-0 z-0">
+        <div
+          class="absolute inset-0 bg-gradient-to-b from-background-dark/80 via-background-dark/40 to-background-dark z-10"
+        ></div>
+        <img
+          class="w-full h-full object-cover scale-105"
+          data-alt="Steaming fresh golden kachoris being served"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZw6fEu_sr0PONgpF7nJ3hTq9HJV7gs58eGd-1dhKcYAhz2-ZNHjnCKlAFr8k30UgK2yrKoW9RKHHEVMGkJvThhPK--MaPm5QcJ5xQnmyLtzxWgoYTYa7ZdCmI8HnHEkFho25TnzgYgcRQBTMJqT_wWiLBIOWYtxY-IoWzwuMSRNnafzx_bLhXIhgyFk6UJjn_E1dCCX-Xqz5J82KuBbkDIJkPCClaZ1P-pBGtJw8Kk_lioF3fjJKITKzKV_zHEwpTR5wOiw_1WPEh"
+        />
+      </div>
+      <div class="relative z-20 text-center px-6 max-w-5xl">
+        <div
+          class="inline-block px-10 py-1.5 rounded-full border border-gold/30 bg-gold/10 backdrop-blur-md mb-9"
+        >
+          <span class="text-gold text-xs font-bold tracking-[0.3em] uppercase"
+            >Authentic Royal Taste</span
+          >
+        </div>
+        <h1
+          class="text-6xl md:text-7xl font-black mb-1 dark:text-white leading-[1.1] tracking-tight"
+        >
+          Raj Misthan Bhandar <br />
+          <span class="gold-text"> ( राज मिठान भंडार ) </span>
+        </h1>
+        <p
+          class="text-lg md:text-2xl font-medium text-slate-300 mb-12 max-w-2xl mx-auto leading-relaxed"
+        >
+          Fresh Kachori &amp; Kadhi | Party Orders Available. <br />
+          <span class="text-gold/80 italic font-light"
+            >Experience the royal taste of tradition in every bite.</span
+          >
+        </p>
+        <div
+          class="flex flex-col sm:flex-row items-center justify-center gap-6"
+        >
+          <button
+            class="gold-border w-full sm:w-auto px-10 py-5 rounded-xl font-bold text-lg flex items-center justify-center gap-3 transition-transform hover:scale-105"
+          >
+            <span class="material-symbols-outlined">call</span>
+            Call Now
+          </button>
+          <button
+            class="bg-[#25D366] hover:bg-[#128C7E] w-full sm:w-auto px-10 py-5 rounded-xl font-bold text-lg text-white flex items-center justify-center gap-3 shadow-xl shadow-[#25D366]/20 transition-transform hover:scale-105"
+          >
+            <span class="material-symbols-outlined text-fill-1">chat</span>
+            Order on WhatsApp
+          </button>
+        </div>
+      </div>
+      <div
+        class="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce opacity-50"
+      >
+        <span class="material-symbols-outlined text-4xl text-gold"
+          >expand_more</span
+        >
+      </div>
+    </section>
+    <!-- Why Choose Us -->
+    <section class="py-24 px-6 relative motif-bg">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <h2 class="text-4xl font-black dark:text-white mb-4">
+            Why Choose Us
+          </h2>
+          <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Card 1 -->
+          <div
+            class="glass p-8 rounded-xl group hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="size-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors"
+            >
+              <span
+                class="material-symbols-outlined text-gold group-hover:text-white transition-colors"
+                >schedule</span
+              >
+            </div>
+            <h3 class="text-xl font-bold mb-3 dark:text-white">Fresh Daily</h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Made fresh every morning using traditional secret recipes passed
+              down through generations.
+            </p>
+          </div>
+          <!-- Card 2 -->
+          <div
+            class="glass p-8 rounded-xl group hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="size-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors"
+            >
+              <span
+                class="material-symbols-outlined text-gold group-hover:text-white transition-colors"
+                >health_and_safety</span
+              >
+            </div>
+            <h3 class="text-xl font-bold mb-3 dark:text-white">
+              Hygienic Kitchen
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Highest standards of cleanliness and food safety in our
+              ISO-certified preparation areas.
+            </p>
+          </div>
+          <!-- Card 3 -->
+          <div
+            class="glass p-8 rounded-xl group hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="size-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors"
+            >
+              <span
+                class="material-symbols-outlined text-gold group-hover:text-white transition-colors"
+                >temple_hindu</span
+              >
+            </div>
+            <h3 class="text-xl font-bold mb-3 dark:text-white">
+              Local Heritage
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Serving the community with authentic flavors for decades with a
+              legacy of trust and taste.
+            </p>
+          </div>
+          <!-- Card 4 -->
+          <div
+            class="glass p-8 rounded-xl group hover:-translate-y-2 transition-all duration-300"
+          >
+            <div
+              class="size-14 bg-primary/20 rounded-lg flex items-center justify-center mb-6 group-hover:bg-primary transition-colors"
+            >
+              <span
+                class="material-symbols-outlined text-gold group-hover:text-white transition-colors"
+                >celebration</span
+              >
+            </div>
+            <h3 class="text-xl font-bold mb-3 dark:text-white">
+              Event Specialist
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+              Customized bulk catering solutions for your special celebrations
+              and corporate events.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Signature Highlights -->
+    <section class="py-24 px-6 bg-background-light dark:bg-background-dark/50">
+      <div class="max-w-7xl mx-auto">
+        <div
+          class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6"
+        >
+          <div>
+            <h2 class="text-4xl font-black dark:text-white mb-2">
+              Signature Highlights
+            </h2>
+            <p class="text-slate-400">
+              Handcrafted delicacies that defined our legacy
+            </p>
+          </div>
+          <button
+            class="text-gold font-bold flex items-center gap-2 hover:underline"
+          >
+            View Full Menu
+            <span class="material-symbols-outlined">arrow_forward</span>
+          </button>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Highlights 1 -->
+          <div class="relative group rounded-2xl overflow-hidden aspect-[4/5]">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              data-alt="Assorted colorful traditional Indian sweets arranged elegantly"
+              src="https://www.japjitravel.com/blog/wp-content/uploads/2024/04/Malpua.webp"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-8"
+            >
+              <h4 class="text-2xl font-bold text-white mb-2">
+                Traditional Sweets
+              </h4>
+              <p class="text-slate-300 text-sm mb-6">
+                Pure desi ghee delicacies made with premium saffron and nuts.
+              </p>
+              <button
+                class="bg-primary/20 hover:bg-primary text-white backdrop-blur-md py-3 rounded-xl font-bold transition-all opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0"
+              >
+                View Category
+              </button>
+            </div>
+          </div>
+          <!-- Highlights 2 -->
+          <div class="relative group rounded-2xl overflow-hidden aspect-[4/5]">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              data-alt="Crispy hot samosas and street snacks"
+              src="https://media.istockphoto.com/photos/famous-street-food-from-rajasthan-called-kadi-kachori-picture-id1417666007?k=20&m=1417666007&s=170667a&w=0&h=d_SH1F7ZwQARy6pxM4QE516rqs4IBoUMLdsGYL2alDA="
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-8"
+            >
+              <h4 class="text-2xl font-bold text-white mb-2">Savory Snacks</h4>
+              <p class="text-slate-300 text-sm mb-6">
+                Spicy Kachoris, Samosas, and traditional namkeen blends.
+              </p>
+              <button
+                class="bg-primary/20 hover:bg-primary text-white backdrop-blur-md py-3 rounded-xl font-bold transition-all opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0"
+              >
+                View Category
+              </button>
+            </div>
+          </div>
+          <!-- Highlights 3 -->
+          <div class="relative group rounded-2xl overflow-hidden aspect-[4/5]">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              data-alt="Premium catering setup with buffet spread"
+              src="https://withjoy.com/blog/wp-content/uploads/2025/06/A-lavish-South-Carolina-wedding-reception-the-centerpiece-being-a-grand-catering-display.-In.jpeg"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent flex flex-col justify-end p-8"
+            >
+              <h4 class="text-2xl font-bold text-white mb-2">Grand Catering</h4>
+              <p class="text-slate-300 text-sm mb-6">
+                Complete hospitality solutions for weddings and functions.
+              </p>
+              <button
+                class="bg-primary/20 hover:bg-primary text-white backdrop-blur-md py-3 rounded-xl font-bold transition-all opacity-0 group-hover:opacity-100 translate-y-4 group-hover:translate-y-0"
+              >
+                View Category
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Master Culinary Grid -->
+    <section class="py-24 px-6 relative" id="menu">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-20">
+          <h2 class="text-5xl font-black dark:text-white uppercase tracking-tighter">Master Culinary Grid</h2>
+          <p class="text-gold mt-4 font-bold tracking-widest uppercase">Select & Add Multiple Items to Cart</p>
+        </div>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+          
+          <!-- Column 1: Savory Bites -->
+          <div class="space-y-8">
+            <div class="flex items-center gap-3 mb-2 border-b border-white/5 pb-4">
+              <span class="material-symbols-outlined text-gold">bakery_dining</span>
+              <h3 class="text-xl font-black text-gold uppercase tracking-tighter">Savory Bites</h3>
+            </div>
+            
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5 hover:border-gold/30 transition-all">
+                <div class="h-44 overflow-hidden relative">
+                    <img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrUCOqMUYqe8ejNyBknIaadNEykossIOUi_P6B8vzCLG1rhOLgsg382nTA9t-pslqcnfvQaH3mfxiY_EdMaFwiQWfDn_h258Rz60dV7M_cNCowRdBs4nUimXz0M8E5dLeCEMmY4ccVq5A-jlK4dRXYl5HZal3-LNPy5gUOHXb3EGZMKiEgXt6wjAIxWoJskuxDjvb34dUuAuQp-UKpRIz-vpXLjPyP1Q7Aee8TzCSJ2OodzFirUCrHLljRJ9BGqs7MbCQEiNpD1z83" class="menu-item-img w-full h-full object-cover" alt="Kachori">
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Special Pyaaz Kachori</h4>
+                        <span class="text-primary font-black">₹35</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Crispy onion-filled Rajasthani specialty.</p>
+                    <button onclick="addToCart('Special Pyaaz Kachori', 35)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIIyGpB6shK6qZGmU8zzTqtkTwvnfi5MBzapYOrjfbpY7FTzfEXl4ukcbQDgmo3hMKa_Q_yYLodujlqwoWN1Iixsa-ix6Y-fOsBnuWaoN87YdAglAdGpTNgklSOYgAHlWZXECqU-gnUXZmCUlTmqLvvUxOF8TEY6m3eayou8ViI54XF57vvEK6QTnxAmHngixB4b6vU150-L49G1bjwcL1U-iVs1eCYFNiJ4prb0grz50EtpkWR6AlCUr-Gq1LLM92AZ9D2IMeiTG" class="menu-item-img w-full h-full object-cover" alt="Kadhi Samosa"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Kadhi Samosa Plate</h4>
+                        <span class="text-primary font-black">₹30</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Traditional spiced samosa with tangy kadhi.</p>
+                    <button onclick="addToCart('Kadhi Samosa Plate', 30)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj_r9oMT378Xg7sPi3gM1Ou228A_thay9rY_iGGIEj-1rON-TT9RMEYdL-8l5vLdl0-FbuHf7u35k0esI2GzFgEhSAkMvxorJk5MQjNPi1mt9qWcRULRldFeCbbOf0Ns-cdPC5gTl4wQymGBLyPaQ-K8L7WA4Jvhlbf8bxBJc_MQ80Cp_LbithXy3vzao0CApYiWsTYmaN4Cd-HA92LcHSUKY_LwNzWhVtmSAiIljLhcHBNoL_zWdHpQmiGo7kTDLB_7Y1xi7-86aT" class="menu-item-img w-full h-full object-cover" alt="Bread Pakora"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Bread Pakora</h4>
+                        <span class="text-primary font-black">₹20</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Golden fried with spiced potato mash.</p>
+                    <button onclick="addToCart('Bread Pakora', 20)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Royal Mithai -->
+          <div class="space-y-8">
+            <div class="flex items-center gap-3 mb-2 border-b border-white/5 pb-4">
+              <span class="material-symbols-outlined text-gold">stars</span>
+              <h3 class="text-xl font-black text-gold uppercase tracking-tighter">Royal Mithai</h3>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5 hover:border-gold/30 transition-all">
+                <div class="h-44 overflow-hidden relative">
+                    <img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeWuKVuOhkSrRoZZ7ESNUtBaZI6dKaxXC-5g4-fkLIj67qZoGTdHUzs6yrSknyVi-Dp8jD8NsvUD__WNxexTFQ4sjGrHV_ejIsSzHkFoNuClm6b-QRAnQq8l1MpPlEkSYTUoSXDkqcg7b2vwNVD6PMwvAXsEuwzxFxejz3ylPI7uIshTUb7K6xPu-heCyc0I7xsBz-Ag_BfCmDNr80rJPX917hlpLPkDDYQK9PxO4-bIuL0nyU8L9NoiVDagxyh-o7sxA_bUE--dMJ" class="menu-item-img w-full h-full object-cover" alt="Kaju Katli">
+                    <div class="absolute top-4 right-4 bg-gold text-background-dark text-[8px] font-black px-2 py-0.5 rounded-full uppercase tracking-widest">Premium</div>
+                </div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Kaju Katli (1kg)</h4>
+                        <span class="text-primary font-black">₹950</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Traditional cashew fudge with silver leaf.</p>
+                    <button onclick="addToCart('Kaju Katli (1kg)', 950)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFZ1r_eEksJO7-KI1YElrPyMj8fPt8mrMIgDBo02Dl5Jcks3zuCFrh3fOiF8jEKVxSgL2nvz4IqQMC65brk1NJqS0UJoeO-LFZ2sza3LK6lvl3z5lSz-wJpkyQv290lh9OVcdxwD_VPuif9H4h5TN7H--3_UXRVm-XidFZUZAe1-DXQDYEXkUvOxy9yTAuWZWpCkj2whybNdU2FWvfw5dXtsGbQ_S64L1BJ6r9_xzxGddxnLcxp2SDBhM8F1up_xmanp6eDnGye3Yo" class="menu-item-img w-full h-full object-cover" alt="Gulab Jamun"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Gulab Jamun (2 pcs)</h4>
+                        <span class="text-primary font-black">₹60</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Warm khoya balls in saffron sugar syrup.</p>
+                    <button onclick="addToCart('Gulab Jamun (2pcs)', 60)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNXacjRzxCmk_IlYPu7SEaa7O1vKociLjrmA8AS6GT3q0E7HCFZN0FVAhbO42QK8TDPWWE7U8XC7Kl0B1l7m6F21oMtQfL7pN3XWZkzM2XDmouDg8v1qFFSQOQ7WM7FxzkyCIY7VPlZsgmn_7LI6OaILQaznB6CMFLRzVEFwSmUjcbLjJ91-K7cI5bOecXi8sxODfdjg5y7WyAMl7TEbR_kA4lys7WGcs4Y4sHVtXKm-5-OvnnXMWeosArSCCPl7IGS9AzqfJ7Jz6M" class="menu-item-img w-full h-full object-cover" alt="Motichoor"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Motichoor Laddu</h4>
+                        <span class="text-primary font-black">₹140</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Fine gram flour pearls made in desi ghee.</p>
+                    <button onclick="addToCart('Motichoor Laddu', 140)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+          </div>
+
+          <!-- Column 3: Drinks & Bakery -->
+          <div class="space-y-8">
+            <div class="flex items-center gap-3 mb-2 border-b border-white/5 pb-4">
+              <span class="material-symbols-outlined text-gold">local_bar</span>
+              <h3 class="text-xl font-black text-gold uppercase tracking-tighter">Drinks & Treats</h3>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXNQ1aZuX-q_1yuGDC8cVeef03gyKZ0fU8GUybxjjGSyAX59AgLgFWqMQulLonZ8akZCknFX3z9zwD_xAHV_nbuhLwAewNqkWZ93WzjErBKyRmK6Mxv8m5EUyfSD_iHTaHgQzZhgfLOoipc3XYE84rQIWrIXsjQF4woX6L70I9Mci_ntAVYjt1_0xoSrEZJZK7dmwzjIMht5jEpLblyjvA1dITdZ3okMRnH7pypHieQjtvATEmUZBypaEy0SMJh31qTNwPrWp4h-fy" class="menu-item-img w-full h-full object-cover" alt="Fruit Cake"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Eggless Fruit Cake</h4>
+                        <span class="text-primary font-black">₹350</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Light, airy and loaded with premium fruits.</p>
+                    <button onclick="addToCart('Fruit Cake', 350)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://images.unsplash.com/photo-1544787210-22bb83063857?auto=format&fit=crop&w=600&q=80" class="menu-item-img w-full h-full object-cover" alt="Masala Chai"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Masala Chai</h4>
+                        <span class="text-primary font-black">₹25</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Brewed fresh with ginger and cardamom.</p>
+                    <button onclick="addToCart('Masala Chai', 25)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+
+            <div class="menu-card glass rounded-2xl overflow-hidden group border border-white/5">
+                <div class="h-44 overflow-hidden"><img loading="lazy" src="https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=600&q=80" class="menu-item-img w-full h-full object-cover" alt="Lassi"></div>
+                <div class="p-5">
+                    <div class="flex justify-between items-start mb-1">
+                        <h4 class="font-bold text-white uppercase text-sm tracking-tight">Sweet Lassi</h4>
+                        <span class="text-primary font-black">₹30</span>
+                    </div>
+                    <p class="text-[10px] text-slate-500 italic mb-4">Traditional thick Punjabi style creamy lassi.</p>
+                    <button onclick="addToCart('Sweet Lassi', 30)" class="w-full bg-white/5 border border-white/10 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-primary transition-all text-white">Add to Cart</button>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    </section>
+<section class="py-24 px-6 dark:bg-[#120808]" id="menu">
+<div class="max-w-7xl mx-auto">
+<div class="text-center mb-20">
+<h2 class="text-5xl font-black dark:text-white">Master Culinary Grid</h2>
+<p class="text-gold mt-4 font-bold tracking-widest uppercase">Everything we serve, with love</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-16">
+<div class="space-y-12">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">bakery_dining</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Savory Bites</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group cursor-default">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Special Pyaaz Kachori</h4>
+<p class="text-xs text-slate-500 italic">Crispy onion-filled delicacy</p>
+</div>
+<span class="font-black text-primary">₹35</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Paneer Puff</h4>
+<p class="text-xs text-slate-500 italic">Flaky bakery crust with spicy paneer</p>
+</div>
+<span class="font-black text-primary">₹45</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Vegetable Patties</h4>
+<p class="text-xs text-slate-500 italic">Oven-fresh with mixed veggies</p>
+</div>
+<span class="font-black text-primary">₹30</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Rajasthani Mirchi Vada</h4>
+<p class="text-xs text-slate-500 italic">Signature spiced green chili</p>
+</div>
+<span class="font-black text-primary">₹30</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">shopping_bag</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Namkeen Packs</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Moong Dal Halwa Namkeen</h4>
+<p class="text-xs text-slate-500 italic">Crispy savory moong dal mix</p>
+</div>
+<span class="font-black text-primary">₹180/kg</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Special Bikaneri Bhujia</h4>
+<p class="text-xs text-slate-500 italic">The classic spicy moth bean sticks</p>
+</div>
+<span class="font-black text-primary">₹240/kg</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-12">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">cake</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Bakery Corner</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Chocolate Truffle Pastry</h4>
+<p class="text-xs text-slate-500 italic">Rich Belgian chocolate layers</p>
+</div>
+<span class="font-black text-primary">₹90</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Pineapple Fresh Cream Cake</h4>
+<p class="text-xs text-slate-500 italic">Light, airy and fruit-filled</p>
+</div>
+<span class="font-black text-primary">₹450</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Butter Cookies (250g)</h4>
+<p class="text-xs text-slate-500 italic">Melt-in-mouth handmade biscuits</p>
+</div>
+<span class="font-black text-primary">₹150</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">stars</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Royal Sweets</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Kaju Katli</h4>
+<p class="text-xs text-slate-500 italic">Premium cashews with silver leaf</p>
+</div>
+<span class="font-black text-primary">₹950/kg</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Gulab Jamun (2 pcs)</h4>
+<p class="text-xs text-slate-500 italic">Warm syrup-soaked khoya balls</p>
+</div>
+<span class="font-black text-primary">₹60</span>
+</div>
+</div>
+</div>
+</div>
+<div class="space-y-12">
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">icecream</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Frozen Treats</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Rajbhog Ice Cream Cup</h4>
+<p class="text-xs text-slate-500 italic">Royal flavor with nuts &amp; saffron</p>
+</div>
+<span class="font-black text-primary">₹70</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Kulfi Falooda Plate</h4>
+<p class="text-xs text-slate-500 italic">Traditional frozen milk dessert</p>
+</div>
+<span class="font-black text-primary">₹120</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Matka Kulfi</h4>
+<p class="text-xs text-slate-500 italic">Authentic taste in clay pot</p>
+</div>
+<span class="font-black text-primary">₹50</span>
+</div>
+</div>
+</div>
+<div>
+<div class="flex items-center gap-3 mb-6">
+<span class="material-symbols-outlined text-gold">local_bar</span>
+<h3 class="text-2xl font-black dark:text-gold uppercase tracking-tighter">Beverages</h3>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Masala Chai</h4>
+<p class="text-xs text-slate-500 italic">Brewed with ginger &amp; cardamom</p>
+</div>
+<span class="font-black text-primary">₹25</span>
+</div>
+<div class="flex justify-between items-center group">
+<div>
+<h4 class="font-bold text-lg dark:text-slate-200 group-hover:text-primary transition-colors">Thandai Cold Drink</h4>
+<p class="text-xs text-slate-500 italic">Nut-based refreshing milk drink</p>
+</div>
+<span class="font-black text-primary">₹80</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="mt-20 text-center">
+<button class="gold-border px-12 py-4 rounded-xl font-black text-lg hover:scale-105 transition-transform flex items-center justify-center gap-4 mx-auto">
+<span class="material-symbols-outlined">download</span>
+                Download Full Visual Menu
+            </button>
+</div>
+</div>
+</section>
+    <!-- Catering Section -->
+    <section
+      class="py-24 px-6 bg-card-dark relative overflow-hidden"
+      id="catering"
+    >
+      <div
+        class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16"
+      >
+        <div class="w-full lg:w-1/2">
+          <div class="relative">
+            <div
+              class="absolute -top-4 -left-4 w-24 h-24 border-t-4 border-l-4 border-gold z-10"
+            ></div>
+            <img
+              class="rounded-2xl shadow-2xl relative z-0"
+              data-alt="Luxury wedding catering setup with Indian theme"
+              src="https://wallpaperaccess.com/full/5600894.jpg"
+            />
+            <div
+              class="absolute -bottom-8 -right-8 glass p-8 rounded-xl max-w-xs hidden md:block"
+            >
+              <p class="text-gold font-black text-4xl mb-2">500+</p>
+              <p
+                class="text-slate-100 text-sm font-bold uppercase tracking-widest"
+              >
+                Events Served Annually
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="w-full lg:w-1/2">
+          <h2 class="text-4xl md:text-5xl font-black dark:text-white mb-6">
+            Catering &amp; Services
+          </h2>
+          <p class="text-slate-400 text-lg mb-8 leading-relaxed">
+            Whether it's a grand wedding or an intimate religious gathering, we
+            bring the royal flavors of Raj Misthan Bhandar to your doorstep with
+            professional service and premium quality.
+          </p>
+          <div class="space-y-4 mb-10">
+            <div
+              class="flex items-center gap-4 glass p-4 rounded-xl border-l-4 border-l-primary"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              <span class="font-bold">Wedding &amp; Engagement Packages</span>
+            </div>
+            <div
+              class="flex items-center gap-4 glass p-4 rounded-xl border-l-4 border-l-gold"
+            >
+              <span class="material-symbols-outlined text-gold"
+                >check_circle</span
+              >
+              <span class="font-bold">Religious Functions (Satsang/Pooja)</span>
+            </div>
+            <div
+              class="flex items-center gap-4 glass p-4 rounded-xl border-l-4 border-l-primary"
+            >
+              <span class="material-symbols-outlined text-primary"
+                >check_circle</span
+              >
+              <span class="font-bold">Corporate Meeting Platters</span>
+            </div>
+          </div>
+          <button
+            class="bg-primary text-white px-10 py-4 rounded-xl font-bold shadow-xl shadow-primary/30 hover:scale-105 transition-transform"
+          >
+            Enquire for Catering
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- Gallery & Testimonials -->
+    <section class="py-24 px-6" id="gallery">
+      <div class="max-w-7xl mx-auto">
+        <h2 class="text-4xl font-black text-center mb-16 dark:text-white">
+          Our Gallery
+        </h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 auto-rows-[200px]">
+          <div class="row-span-2 col-span-2 group overflow-hidden rounded-2xl">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              data-alt="Modern shop interior with clean glass displays"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzgqHQnEmBTTEoTpm6sGHKMUrTMMrNJFaj3-RXAR3eW11FdnowmEO9GHxOGrk3Ne1iTvBW-aMTUQP16bL7zOFesK19tMZ8onhnB6KpMvsxKJ1fQEKQCnL8DTpmBox1xIBLU2MVJ1Rd3Xl_4rofGoqgbSGjFSXeKXOd6deA3Z9pdYlpI9qpLxwcIUDYaHZaXvqXFmrUsLfaw8B-owpvEs1vt9VohI0buYwPzv2lriSBNyulsK-spB4784P0sYybLcZHi1fG7XhQUSwR"
+            />
+          </div>
+          <div class="group overflow-hidden rounded-2xl">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              data-alt="Close up of Indian sweet treats"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoLCKITGqlv_yaB8j4n2XJbxnNu17Hdk1x5QMnEiQZvKom3G4Hue10lwIH-5oo55d9mKssW-o0OTjzamiq11cH1rjEf7-U2Z96XdDdEtZAYYm4-ACbDZUUqlzI94JQHC1gJ2aHWJCw44IzvzIFixndppgmH4YRrGaOzd08qVr61ixh5wT7oJBIp5KWxLNs-3tT2E_NAgk_Ra0_UtxdvXCrLNvYa4zQL0dochdHV3gXe1_lg-zeVh3skA8VENEZO9cXL9CQLE0otom-"
+            />
+          </div>
+          <div class="group overflow-hidden rounded-2xl">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              data-alt="Chef preparing snacks in hygienic kitchen"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXPQ8wbd-uj5Rvo1Cs-zUPqbL2mORd_EURB5Ct2qS5wbCgIULCDbOSbBj5_skIcw9aczu7zU8hJvRqy1h1onVPwURX9GVxzgyf66nyzH3s3R-1HtncEhSRogItDlZ9PXRTCgMbyXsAjUbMqLZ-ocT3PEdqUELhBTCoD7q17hynh5RTU4dEcgkr6mWaqQJkafHuau7tEJamOT4phXL0OIIoLX0nfq2pGBTlvkbNOaYy-cXPX2fm4pkOjbVN9TP34tGP75J0k4SUSSRs"
+            />
+          </div>
+          <div class="col-span-2 group overflow-hidden rounded-2xl">
+            <img
+              class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              data-alt="Catering buffet at a luxury event"
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxQIKC1a6yyY-5fR-Dl6wdHSl86ksQ4ZSzGySwJ5rpwVtV9QWeA3LdkAcWydEC4ld9cg5eiYbPN2HMBVg8Q3Vr1mqHAPLyutz8kc0452neIAW9Bq9n5TT1xkYM_IX3OnGvFMpR_udr5MOjJaWl0qfrF7qMB7iTGjqXbH-1zSF3FAV19RikAwxcZZSEAvQCibH5POwvN-Cehu-H68SbxEuFCAXzJ-VKyTnmGXS9j96zsCOaA-9h3kCnoggACQOFRaTznHzA3qn2K15J"
+            />
+          </div>
+        </div>
+        <!-- Testimonials -->
+        <div class="mt-24 grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div class="glass p-8 rounded-2xl relative">
+            <span
+              class="material-symbols-outlined text-primary text-5xl absolute -top-6 left-8 bg-background-dark px-2"
+              >format_quote</span
+            >
+            <div class="flex text-gold mb-4">
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-6">
+              "Best Kachori in the city! The Pyaaz Kachori is out of this world.
+              Always fresh and hot."
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold"
+              >
+                RK
+              </div>
+              <div>
+                <p class="font-bold">Rahul Khanna</p>
+                <p class="text-xs text-slate-500">Local Guide</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass p-8 rounded-2xl relative">
+            <span
+              class="material-symbols-outlined text-primary text-5xl absolute -top-6 left-8 bg-background-dark px-2"
+              >format_quote</span
+            >
+            <div class="flex text-gold mb-4">
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-6">
+              "Used their catering for my daughter's wedding. The service was
+              impeccable and guests loved the sweets."
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold"
+              >
+                AS
+              </div>
+              <div>
+                <p class="font-bold">Anita Sharma</p>
+                <p class="text-xs text-slate-500">Event Organizer</p>
+              </div>
+            </div>
+          </div>
+          <div class="glass p-8 rounded-2xl relative">
+            <span
+              class="material-symbols-outlined text-primary text-5xl absolute -top-6 left-8 bg-background-dark px-2"
+              >format_quote</span
+            >
+            <div class="flex text-gold mb-4">
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+              <span class="material-symbols-outlined text-fill-1">star</span>
+            </div>
+            <p class="text-slate-300 italic mb-6">
+              "Hygiene standards are really impressive. You can see they care
+              about quality. Highly recommended."
+            </p>
+            <div class="flex items-center gap-3">
+              <div
+                class="size-10 rounded-full bg-primary/20 flex items-center justify-center font-bold"
+              >
+                VM
+              </div>
+              <div>
+                <p class="font-bold">Vikas Mehra</p>
+                <p class="text-xs text-slate-500">Food Blogger</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer & Contact -->
+    <footer
+      class="bg-background-dark border-t border-primary/20 pt-24"
+      id="contact"
+    >
+      <div class="max-w-7xl mx-auto px-6 pb-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 mb-20">
+          <div>
+            <h2 class="text-4xl font-black mb-6 dark:text-white">
+              Get in Touch
+            </h2>
+            <p class="text-slate-400 mb-10 text-lg">
+              Planning an event or have questions about our menu? Our team is
+              here to help you create memorable moments.
+            </p>
+            <div class="space-y-6">
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1"
+                  >location_on</span
+                >
+                <div>
+                  <h5 class="font-bold dark:text-slate-100">Our Location</h5>
+                  <p class="text-slate-400">
+                    Bus stand Jalsu (303701), Jalsu, Jaipur, Rajasthan
+                  </p>
+                  <a
+                    class="text-primary text-sm font-bold hover:underline"
+                    href="#"
+                    >Get Directions</a
+                  >
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1"
+                  >call</span
+                >
+                <div>
+                  <h5 class="font-bold dark:text-slate-100">Contact Us</h5>
+                  <p class="text-slate-400">+91 9587969804 / +91 9799938857</p>
+                </div>
+              </div>
+              <div class="flex items-start gap-4">
+                <span class="material-symbols-outlined text-primary mt-1"
+                  >schedule</span
+                >
+                <div>
+                  <h5 class="font-bold dark:text-slate-100">Opening Hours</h5>
+                  <p class="text-slate-400">Mon - Sun: 7:00 AM - 10:00 PM</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="glass p-10 rounded-2xl border border-primary/10">
+            <form class="space-y-6">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                  <label class="block text-sm font-bold mb-2 text-slate-300"
+                    >Name</label
+                  >
+                  <input
+                    class="w-full bg-background-dark border border-slate-700 rounded-xl px-4 py-3 focus:border-primary focus:ring-primary transition-all text-white"
+                    placeholder="Enter your name"
+                    type="text"
+                  />
+                </div>
+                <div>
+                  <label class="block text-sm font-bold mb-2 text-slate-300"
+                    >Phone</label
+                  >
+                  <input
+                    class="w-full bg-background-dark border border-slate-700 rounded-xl px-4 py-3 focus:border-primary focus:ring-primary transition-all text-white"
+                    placeholder="Phone number"
+                    type="tel"
+                  />
+                </div>
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-2 text-slate-300"
+                  >Subject</label
+                >
+                <select
+                  class="w-full bg-background-dark border border-slate-700 rounded-xl px-4 py-3 focus:border-primary focus:ring-primary transition-all text-white"
+                >
+                  <option>General Enquiry</option>
+                  <option>Catering Request</option>
+                  <option>Bulk Order</option>
+                  <option>Feedback</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-bold mb-2 text-slate-300"
+                  >Message</label
+                >
+                <textarea
+                  class="w-full bg-background-dark border border-slate-700 rounded-xl px-4 py-3 focus:border-primary focus:ring-primary transition-all text-white"
+                  placeholder="How can we help you?"
+                  rows="4"
+                ></textarea>
+              </div>
+              <button
+                class="w-full bg-primary py-4 rounded-xl font-bold text-white shadow-lg shadow-primary/20 hover:bg-red-700 transition-colors"
+              >
+                Send Message
+              </button>
+            </form>
+          </div>
+        </div>
+        <div
+          class="flex flex-col md:flex-row items-center justify-between pt-12 border-t border-primary/10 gap-6"
+        >
+          <div class="flex items-center gap-3 opacity-80">
+            <div
+              class="size-8 bg-primary rounded-lg flex items-center justify-center text-white text-xs"
+            >
+              RM
+            </div>
+            <span class="font-bold tracking-widest text-sm uppercase"
+              >© 2024 Raj Misthan Bhandar</span
+            >
+          </div>
+          <div class="flex items-center gap-6">
+            <a
+              class="text-slate-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <svg class="size-6 fill-current" viewbox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              class="text-slate-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <svg class="size-6 fill-current" viewbox="0 0 24 24">
+                <path
+                  d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"
+                ></path>
+              </svg>
+            </a>
+            <a
+              class="text-slate-400 hover:text-primary transition-colors"
+              href="#"
+            >
+              <svg class="size-6 fill-current" viewbox="0 0 24 24">
+                <path
+                  d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"
+                ></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      let cart = [];
+      const shopPhone = "919587969804";
+
+      function toggleCart() {
+        const panel = document.getElementById('cartPanel');
+        if (panel) {
+          panel.classList.toggle('hidden');
+          renderCart();
+        }
+      }
+
+      function addToCart(name, price) {
+        const existing = cart.find(i => i.name === name);
+        if(existing) {
+            existing.qty++;
+        } else {
+            cart.push({ name, price, qty: 1 });
+        }
+        updateBadge();
+        const badge = document.getElementById('cartBadge');
+        if (badge) {
+          badge.classList.add('scale-150');
+          setTimeout(() => badge.classList.remove('scale-150'), 200);
+        }
+      }
+
+      function updateBadge() {
+        const badge = document.getElementById('cartBadge');
+        if (!badge) return;
+        const count = cart.reduce((acc, curr) => acc + curr.qty, 0);
+        if(count > 0) {
+            badge.innerText = count;
+            badge.classList.remove('hidden');
+        } else {
+            badge.classList.add('hidden');
+        }
+      }
+
+      function removeFromCart(index) {
+        if(cart[index].qty > 1) {
+            cart[index].qty--;
+        } else {
+            cart.splice(index, 1);
+        }
+        renderCart();
+        updateBadge();
+      }
+
+      function renderCart() {
+        const container = document.getElementById('cartItems');
+        const totalEl = document.getElementById('cartTotal');
+        if(!container || !totalEl) return;
+        
+        if(cart.length === 0) {
+            container.innerHTML = `<p class="text-slate-500 text-center py-20 italic">Your cart is empty...</p>`;
+            totalEl.innerText = `₹0`;
+            return;
+        }
+
+        let html = "";
+        let total = 0;
+        cart.forEach((item, index) => {
+            const lineTotal = item.price * item.qty;
+            total += lineTotal;
+            html += `
+                <div class="flex justify-between items-center bg-white/5 p-5 rounded-2xl border border-white/5">
+                    <div class="flex-1">
+                        <h4 class="font-black text-white text-xs uppercase tracking-tight">${item.name}</h4>
+                        <p class="text-[10px] text-slate-500 font-bold uppercase tracking-widest mt-1">₹${item.price} x ${item.qty}</p>
+                    </div>
+                    <div class="flex items-center gap-5">
+                        <span class="font-black text-gold text-lg">₹${lineTotal}</span>
+                        <button onclick="removeFromCart(${index})" class="size-8 flex items-center justify-center rounded-lg bg-primary/20 text-primary hover:bg-primary transition-all text-white">
+                            <span class="material-symbols-outlined text-sm">remove</span>
+                        </button>
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        totalEl.innerText = `₹${total}`;
+      }
+
+      function checkoutWhatsApp() {
+        if(cart.length === 0) return;
+        let message = `*RAJ MISTHAN BHANDAR - NEW ORDER*\n\n`;
+        let total = 0;
+        cart.forEach(item => {
+            const lineTotal = item.price * item.qty;
+            total += lineTotal;
+            message += `• *${item.name}* (x${item.qty}) - ₹${lineTotal}\n`;
+        });
+        message += `\n*TOTAL AMOUNT: ₹${total}*\n\n_Please confirm if home delivery is available to my location!_`;
+        window.open(`https://wa.me/${shopPhone}?text=${encodeURIComponent(message)}`, '_blank');
+      }
+
+      function orderWhatsAppDirect(topic) {
+        const message = `Hello Raj Misthan Bhandar, I am inquiring about: *${topic}*. Please share more details!`;
+        window.open(`https://wa.me/${shopPhone}?text=${encodeURIComponent(message)}`, '_blank');
+      }
+
+      function handleInquiry(e) {
+        e.preventDefault();
+        const name = document.getElementById('qName').value;
+        const phone = document.getElementById('qPhone').value;
+        const msg = document.getElementById('qMsg').value;
+        const message = `*WEBSITE INQUIRY*\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Request:* ${msg}`;
+        window.open(`https://wa.me/${shopPhone}?text=${encodeURIComponent(message)}`, '_blank');
+      }
+
+      // Live Shop Status Logic
+      function updateShopStatus() {
+        const now = new Date();
+        const hour = now.getHours();
+        const statusEl = document.getElementById('shopStatus');
+        const footerStatusEl = document.getElementById('footerStatus');
+        const badgeEl = document.getElementById('shopBadge');
+        
+        if (hour >= 7 && hour < 22) {
+          if (statusEl) statusEl.innerText = "Open Now • 7:00 AM - 10:00 PM";
+          if (footerStatusEl) {
+            footerStatusEl.innerText = "Open Now";
+            footerStatusEl.className = "text-whatsapp text-[10px] font-black mt-1 uppercase tracking-widest";
+          }
+          if (badgeEl) {
+            const circle = badgeEl.querySelector('span:first-child');
+            const text = badgeEl.querySelector('span:last-child');
+            if (circle) circle.className = "size-2 rounded-full bg-whatsapp animate-pulse";
+            if (text) text.innerText = "Open Now";
+          }
+        } else {
+          if (statusEl) statusEl.innerText = "Closed Now • Opens at 7:00 AM";
+          if (footerStatusEl) {
+            footerStatusEl.innerText = "Closed Now";
+            footerStatusEl.className = "text-red-500 text-[10px] font-black mt-1 uppercase tracking-widest";
+          }
+          if (badgeEl) {
+            const circle = badgeEl.querySelector('span:first-child');
+            const text = badgeEl.querySelector('span:last-child');
+            if (circle) circle.className = "size-2 rounded-full bg-red-500";
+            if (text) text.innerText = "Closed Now";
+          }
+        }
+      }
+
+      // Ensure script runs after DOM is ready
+      document.addEventListener('DOMContentLoaded', () => {
+        updateShopStatus();
+        setInterval(updateShopStatus, 60000);
+      });
+    </script>
+  </body>
+</html>

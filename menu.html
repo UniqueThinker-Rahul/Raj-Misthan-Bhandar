@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Raj Misthan Bhandar | Premium Menu</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#da0b0b",
+                        "gold": "#D4AF37",
+                        "background-light": "#fdfaf6",
+                        "background-dark": "#221010",
+                        "whatsapp": "#25D366"
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"],
+                        "serif": ["Georgia", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        .indian-pattern {
+            background-image: radial-gradient(circle at 2px 2px, rgba(218, 11, 11, 0.03) 1px, transparent 0);
+            background-size: 24px 24px;
+        }
+        .menu-card:hover .zoom-img {
+            transform: scale(1.1);
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .cart-drawer {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+        /* Custom styling for inputs to match the theme */
+        .theme-input {
+            width: 100%;
+            background-color: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .dark .theme-input {
+            background-color: #1e293b;
+            border-color: #334155;
+        }
+        .theme-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(218, 11, 11, 0.2);
+            border-color: #da0b0b;
+        }
+    </style>
+</head>
+<body class="font-display bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 indian-pattern min-h-screen">
+
+<!-- Header Section -->
+<header class="sticky top-0 z-50 bg-white/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="bg-primary p-2 rounded-lg">
+                <span class="material-symbols-outlined text-white text-3xl">temple_hindu</span>
+            </div>
+            <div>
+                <h1 class="text-xl font-bold text-primary tracking-tight leading-none uppercase">RAJ MISTHAN</h1>
+                <p class="text-[10px] uppercase tracking-widest text-gold font-bold">Bhandar • Since 1985</p>
+            </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-sm font-semibold text-primary border-b-2 border-primary" href="menu.html">Menu</a>
+            <!-- <a class="text-sm font-semibold hover:text-primary transition-colors" href="#">About Us</a>
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="contact.html">Contact</a> -->
+        </nav>
+        <div class="flex items-center gap-4">
+            <!-- Search Bar -->
+            <div class="relative hidden lg:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input id="menuSearch" class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 w-64" placeholder="Search for sweets, kachori..." type="text"/>
+            </div>
+            <button onclick="toggleCart()" class="relative bg-primary text-white px-5 py-2 rounded-full text-sm font-bold flex items-center gap-2 hover:bg-red-700 transition-all shadow-lg shadow-primary/20">
+                <span class="material-symbols-outlined text-lg">shopping_bag</span>
+                <span id="cartCount" class="bg-white text-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full">0</span>
+                Order Now
+            </button>
+        </div>
+    </div>
+    <!-- Sticky Sub-Nav -->
+    <div class="bg-white dark:bg-background-dark border-t border-slate-100 dark:border-slate-800 overflow-x-auto">
+        <div class="max-w-7xl mx-auto px-6 flex items-center gap-8 py-3 whitespace-nowrap scrollbar-hide">
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#savory">
+                <span class="material-symbols-outlined text-gold">restaurant</span> Savory Bites
+            </a>
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#sweets">
+                <span class="material-symbols-outlined text-gold">bakery_dining</span> Royal Sweets
+            </a>
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#namkeen">
+                <span class="material-symbols-outlined text-gold">eco</span> Namkeen Packs
+            </a>
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#bakery">
+                <span class="material-symbols-outlined text-gold">cake</span> Bakery Corner
+            </a>
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#frozen">
+                <span class="material-symbols-outlined text-gold">icecream</span> Frozen Treats
+            </a>
+            <a class="flex items-center gap-2 text-sm font-medium text-slate-600 dark:text-slate-400 hover:text-primary transition-colors" href="#beverages">
+                <span class="material-symbols-outlined text-gold">coffee</span> Beverages
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-6 py-12">
+    <!-- Hero Section -->
+    <div class="mb-16 relative rounded-xl overflow-hidden h-[300px] flex items-center">
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: linear-gradient(to right, rgba(34, 16, 16, 0.9), transparent), url('https://lh3.googleusercontent.com/aida-public/AB6AXuArYTviR5zdbovSsUTqQPAH1dV2QWAh8FKZQmsU62OOFUfGOkzx6PccHgkQHBs_dEs2jsOdy7y95pUmr0O8SrBI487J8egEAkBXpPQ4-oioPseIDJs-Ja1t7jq4Q43oeQSW-67V6oS7sGJ6IfNP1Cl__hBB6fYG6_UWjPAlnLh46fLn0DzHIQcQjybOYU-p1D8G1z1fY86cJSY3bx4xYJvUzfGQDt9pODWdCQGkCCTLczZ6vNrmDwxHzJQm1bImUHOFcERDMVLwQzXT')"></div>
+        <div class="relative z-10 px-12 text-white">
+            <h2 class="text-gold font-bold tracking-widest uppercase text-sm mb-2">Exquisite Taste</h2>
+            <h3 class="text-5xl font-serif font-bold mb-4">Our Premium Menu</h3>
+            <p class="max-w-md text-slate-300 leading-relaxed">Crafting authentic flavors with premium ingredients for over three decades. Experience the royal taste of Rajasthan.</p>
+        </div>
+    </div>
+
+    <!-- Category: Savory Bites -->
+    <section class="mb-20 scroll-mt-32 menu-section" id="savory">
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-3xl font-serif font-bold text-primary">Savory Bites</h2>
+            <div class="h-[2px] grow bg-primary/10"></div>
+            <span class="material-symbols-outlined text-gold">flare</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="savoryContainer">
+            <!-- Special Kachori -->
+            <div class="menu-card group bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img class="zoom-img w-full h-full object-cover transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrUCOqMUYqe8ejNyBknIaadNEykossIOUi_P6B8vzCLG1rhOLgsg382nTA9t-pslqcnfvQaH3mfxiY_EdMaFwiQWfDn_h258Rz60dV7M_cNCowRdBs4nUimXz0M8E5dLeCEMmY4ccVq5A-jlK4dRXYl5HZal3-LNPy5gUOHXb3EGZMKiEgXt6wjAIxWoJskuxDjvb34dUuAuQp-UKpRIz-vpXLjPyP1Q7Aee8TzCSJ2OodzFirUCrHLljRJ9BGqs7MbCQEiNpD1z83" alt="Special Kachori"/>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-serif font-bold text-primary">Special Pyaaz Kachori</h4>
+                        <span class="text-gold font-bold">₹25</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Crispy golden crust with spiced onion filling, served with tamarind chutney.</p>
+                    <button onclick="addToCart(1, 'Special Pyaaz Kachori', 25)" class="w-full bg-whatsapp text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95">
+                        <span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Kadhi Samosa -->
+            <div class="menu-card group bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img class="zoom-img w-full h-full object-cover transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChIIyGpB6shK6qZGmU8zzTqtkTwvnfi5MBzapYOrjfbpY7FTzfEXl4ukcbQDgmo3hMKa_Q_yYLodujlqwoWN1Iixsa-ix6Y-fOsBnuWaoN87YdAglAdGpTNgklSOYgAHlWZXECqU-gnUXZmCUlTmqLvvUxOF8TEY6m3eayou8ViI54XF57vvEK6QTnxAmHngixB4b6vU150-L49G1bjwcL1U-iVs1eCYFNiJ4prb0grz50EtpkWR6AlCUr-Gq1LLM92AZ9D2IMeiTG" alt="Kadhi Samosa"/>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-serif font-bold text-primary">Kadhi Samosa</h4>
+                        <span class="text-gold font-bold">₹20</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Traditional spiced samosa served with our signature tangy yogurt kadhi.</p>
+                    <button onclick="addToCart(2, 'Kadhi Samosa', 20)" class="w-full bg-whatsapp text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95">
+                        <span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Bread Pakora -->
+            <div class="menu-card group bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-[4/3]">
+                    <img class="zoom-img w-full h-full object-cover transition-transform duration-500" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDj_r9oMT378Xg7sPi3gM1Ou228A_thay9rY_iGGIEj-1rON-TT9RMEYdL-8l5vLdl0-FbuHf7u35k0esI2GzFgEhSAkMvxorJk5MQjNPi1mt9qWcRULRldFeCbbOf0Ns-cdPC5gTl4wQymGBLyPaQ-K8L7WA4Jvhlbf8bxBJc_MQ80Cp_LbithXy3vzao0CApYiWsTYmaN4Cd-HA92LcHSUKY_LwNzWhVtmSAiIljLhcHBNoL_zWdHpQmiGo7kTDLB_7Y1xi7-86aT" alt="Bread Pakora"/>
+                </div>
+                <div class="p-6">
+                    <div class="flex justify-between items-start mb-2">
+                        <h4 class="text-xl font-serif font-bold text-primary">Bread Pakora</h4>
+                        <span class="text-gold font-bold">₹20</span>
+                    </div>
+                    <p class="text-slate-500 dark:text-slate-400 text-sm mb-6">Double layered bread sandwich with spiced mash dipped in gram flour batter.</p>
+                    <button onclick="addToCart(3, 'Bread Pakora', 20)" class="w-full bg-whatsapp text-white py-3 rounded-lg font-bold flex items-center justify-center gap-2 hover:opacity-90 transition-opacity active:scale-95">
+                        <span class="material-symbols-outlined">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category: Royal Sweets -->
+    <section class="mb-20 scroll-mt-32 menu-section" id="sweets">
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="text-3xl font-serif font-bold text-primary">Royal Sweets</h2>
+            <div class="h-[2px] grow bg-primary/10"></div>
+            <span class="material-symbols-outlined text-gold">workspace_premium</span>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Kaju Katli -->
+            <div class="menu-card bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-square">
+                    <img class="zoom-img w-full h-full object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCeWuKVuOhkSrRoZZ7ESNUtBaZI6dKaxXC-5g4-fkLIj67qZoGTdHUzs6yrSknyVi-Dp8jD8NsvUD__WNxexTFQ4sjGrHV_ejIsSzHkFoNuClm6b-QRAnQq8l1MpPlEkSYTUoSXDkqcg7b2vwNVD6PMwvAXsEuwzxFxejz3ylPI7uIshTUb7K6xPu-heCyc0I7xsBz-Ag_BfCmDNr80rJPX917hlpLPkDDYQK9PxO4-bIuL0nyU8L9NoiVDagxyh-o7sxA_bUE--dMJ" alt="Kaju Katli"/>
+                    <span class="absolute top-3 left-3 bg-primary text-white text-[10px] px-2 py-1 font-bold rounded-full uppercase">Best Seller</span>
+                </div>
+                <div class="p-4">
+                    <h4 class="text-lg font-serif font-bold text-primary">Kaju Katli</h4>
+                    <p class="text-gold text-sm font-bold mb-3">₹750 / kg</p>
+                    <button onclick="addToCart(4, 'Kaju Katli', 750, 'kg')" class="w-full border-2 border-whatsapp text-whatsapp py-2 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-whatsapp hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Gulab Jamun -->
+            <div class="menu-card bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-square">
+                    <img class="zoom-img w-full h-full object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAFZ1r_eEksJO7-KI1YElrPyMj8fPt8mrMIgDBo02Dl5Jcks3zuCFrh3fOiF8jEKVxSgL2nvz4IqQMC65brk1NJqS0UJoeO-LFZ2sza3LK6lvl3z5lSz-wJpkyQv290lh9OVcdxwD_VPuif9H4h5TN7H--3_UXRVm-XidFZUZAe1-DXQDYEXkUvOxy9yTAuWZWpCkj2whybNdU2FWvfw5dXtsGbQ_S64L1BJ6r9_xzxGddxnLcxp2SDBhM8F1up_xmanp6eDnGye3Yo" alt="Gulab Jamun"/>
+                </div>
+                <div class="p-4">
+                    <h4 class="text-lg font-serif font-bold text-primary">Gulab Jamun</h4>
+                    <p class="text-gold text-sm font-bold mb-3">₹350 / kg</p>
+                    <button onclick="addToCart(5, 'Gulab Jamun', 350, 'kg')" class="w-full border-2 border-whatsapp text-whatsapp py-2 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-whatsapp hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Motichoor Ladoo -->
+            <div class="menu-card bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-square">
+                    <img class="zoom-img w-full h-full object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCNXacjRzxCmk_IlYPu7SEaa7O1vKociLjrmA8AS6GT3q0E7HCFZN0FVAhbO42QK8TDPWWE7U8XC7Kl0B1l7m6F21oMtQfL7pN3XWZkzM2XDmouDg8v1qFFSQOQ7WM7FxzkyCIY7VPlZsgmn_7LI6OaILQaznB6CMFLRzVEFwSmUjcbLjJ91-K7cI5bOecXi8sxODfdjg5y7WyAMl7TEbR_kA4lys7WGcs4Y4sHVtXKm-5-OvnnXMWeosArSCCPl7IGS9AzqfJ7Jz6M" alt="Motichoor Ladoo"/>
+                </div>
+                <div class="p-4">
+                    <h4 class="text-lg font-serif font-bold text-primary">Motichoor Ladoo</h4>
+                    <p class="text-gold text-sm font-bold mb-3">₹140 / kg</p>
+                    <button onclick="addToCart(6, 'Motichoor Ladoo', 140, 'kg')" class="w-full border-2 border-whatsapp text-whatsapp py-2 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-whatsapp hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Rasgulla -->
+            <div class="menu-card bg-white dark:bg-slate-900 rounded-lg overflow-hidden shadow-sm border border-slate-100 dark:border-slate-800">
+                <div class="relative overflow-hidden aspect-square">
+                    <img class="zoom-img w-full h-full object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJNAgd0NsNr6B6rHWiFJ1mLxOrnsk9WrRX4nuuPFbj-22s7UR_yXH5K7_PUcirLgMITWB80479SwclDhDx_1ACNU4F3XGd85u8rppFOA4eiFnOMW5NclAPtwBRe-NBwEdMNo5TcwLw1TtHGD_jgntHxOhqc0S3clIf4rFlQOh4HnsJF-qNXCwMZ0sL5I6W9-Mt2DPU6vXBNSBdJMJf7mZRClOsnvusgvTVV15iu4XtCDZDY1ug922E_ZQHV4vSAxhYO8wk_BDKfYGU" alt="Rasgulla"/>
+                </div>
+                <div class="p-4">
+                    <h4 class="text-lg font-serif font-bold text-primary">Rasgulla</h4>
+                    <p class="text-gold text-sm font-bold mb-3">₹250 / kg</p>
+                    <button onclick="addToCart(7, 'Rasgulla', 250, 'kg')" class="w-full border-2 border-whatsapp text-whatsapp py-2 rounded-lg font-bold text-sm flex items-center justify-center gap-2 hover:bg-whatsapp hover:text-white transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-sm">add_shopping_cart</span> Add to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bakery & Namkeen -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <section class="scroll-mt-32 menu-section" id="namkeen">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl font-serif font-bold text-primary">Namkeen Packs</h2>
+                <div class="h-[1px] grow bg-primary/10"></div>
+            </div>
+            <div class="space-y-4">
+                <div onclick="addToCart(8, 'Shahi Mixture', 180, '500g')" class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-100 dark:border-slate-800 group cursor-pointer hover:border-gold transition-all">
+                    <div class="size-20 rounded overflow-hidden flex-shrink-0">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCGe7nqwGy04wUbqnQbhDgyUKfnqDaiP_sJUH_nLZUPjThSpOqg7b-QVXTwgXlIWLuO0jOgM3VsFN4N-6NULPSusC5VUH9ebx6Y3l1SS04WlYfW0IWFdq-dXEUZBhojcSa7TiSwRTBDxtT1jCk8fhQC6iFUM9ee7v1xy4iuvDS0GDybfSsJaGC2VgYi5efXsWvxzfRFgqVZPmj3OgREuLrfDjR6zlqi1ReiEWTSab1kjzjEv4-fugo30lUYJ4JYhLKZmMpxO18BuIbS" alt="Shahi Mixture"/>
+                    </div>
+                    <div class="flex-1">
+                        <h5 class="font-bold text-primary">Shahi Mixture (500g)</h5>
+                        <p class="text-xs text-slate-500">Premium blend of nuts and spices.</p>
+                    </div>
+                    <span class="font-bold text-gold">₹180</span>
+                </div>
+                <div onclick="addToCart(9, 'Bikaneri Bhujia', 140, '400g')" class="flex items-center gap-4 bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-100 dark:border-slate-800 group cursor-pointer hover:border-gold transition-all">
+                    <div class="size-20 rounded overflow-hidden flex-shrink-0">
+                        <img class="w-full h-full object-cover group-hover:scale-110 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCPwCGozB4VSEBZXaP_prm0py6T2nnfV1d1ru7-6zYCXSUmUt9rPpJMIGaEL5cjAP87Razpg-5wVTO2Y2tgM74i0xIu9Oyg0aOdelhOz-SZjbCVjjgttCuQ4_e23L5d-dgJhU0503dij6CMMnpilQXbAuajSdcoavjuMaX_NHl-thYfp75yIoPW7Q7sLAlX25m7ot2f7wIBbVgI206QvNy8r_A3qKtFdQlkzPsTLHhX33YIigOHHOAPTBHJC-PGfpnVTA6Ci2vGd4P1" alt="Bikaneri Bhujia"/>
+                    </div>
+                    <div class="flex-1">
+                        <h5 class="font-bold text-primary">Bikaneri Bhujia (400g)</h5>
+                        <p class="text-xs text-slate-500">Classic spicy gram flour strands.</p>
+                    </div>
+                    <span class="font-bold text-gold">₹140</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="scroll-mt-32 menu-section" id="bakery">
+            <div class="flex items-center gap-4 mb-8">
+                <h2 class="text-2xl font-serif font-bold text-primary">Bakery Corner</h2>
+                <div class="h-[1px] grow bg-primary/10"></div>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+                <div onclick="addToCart(10, 'Eggless Fruit Cake', 350)" class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-100 dark:border-slate-800 text-center cursor-pointer hover:border-primary transition-all group">
+                    <img class="w-24 h-24 mx-auto object-cover rounded-full mb-3 group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBXNQ1aZuX-q_1yuGDC8cVeef03gyKZ0fU8GUybxjjGSyAX59AgLgFWqMQulLonZ8akZCknFX3z9zwD_xAHV_nbuhLwAewNqkWZ93WzjErBKyRmK6Mxv8m5EUyfSD_iHTaHgQzZhgfLOoipc3XYE84rQIWrIXsjQF4woX6L70I9Mci_ntAVYjt1_0xoSrEZJZK7dmwzjIMht5jEpLblyjvA1dITdZ3okMRnH7pypHieQjtvATEmUZBypaEy0SMJh31qTNwPrWp4h-fy" alt="Fruit Cake"/>
+                    <h5 class="font-bold text-sm text-primary">Eggless Fruit Cake</h5>
+                    <p class="text-gold font-bold text-xs mt-1">₹350</p>
+                </div>
+                <div onclick="addToCart(11, 'Chocolate Pastry', 45)" class="bg-white dark:bg-slate-900 p-4 rounded-lg border border-slate-100 dark:border-slate-800 text-center cursor-pointer hover:border-primary transition-all group">
+                    <img class="w-24 h-24 mx-auto object-cover rounded-full mb-3 group-hover:scale-105 transition-transform" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7hVLZvSD7BbpQAC5KD6GsYkEw8HQPKwinneFBh-5SBVVAymp3quE5kyAoQTSqKCgWAqlXtkQikUcOhP7J2r1VwzSQILQmiZ3nsoev9ZN1PrudSc07z1zjpQmyon2_nmBrKGGiEuBDl9VacSSvEqfcfaym64WwADugsCMHcYWBauTmNCYa9SjKC_2Dc7mQWY3UCJswfqKppUrprjEflGD0AjzLXKupfR7Y9_B-blmWvTKuoluvr04IrqQhF6MjbnBeBtYdov78Zma8" alt="Chocolate Pastry"/>
+                    <h5 class="font-bold text-sm text-primary">Chocolate Pastry</h5>
+                    <p class="text-gold font-bold text-xs mt-1">₹45</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Beverages -->
+    <section class="mt-20 scroll-mt-32 menu-section" id="beverages">
+        <div class="bg-primary/5 rounded-2xl p-8 lg:p-12">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-serif font-bold text-primary mb-2">Refreshing Beverages</h2>
+                <p class="text-slate-600 italic">Perfect companions for your savory snacks</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div onclick="addToCart(12, 'Masala Chai', 10)" class="flex flex-col items-center text-center cursor-pointer group">
+                    <div class="size-16 rounded-full bg-primary flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">emoji_food_beverage</span>
+                    </div>
+                    <h4 class="font-bold text-primary">Masala Chai</h4>
+                    <span class="text-gold font-bold">₹10</span>
+                </div>
+                <div onclick="addToCart(13, 'Cold Coffee', 25)" class="flex flex-col items-center text-center cursor-pointer group">
+                    <div class="size-16 rounded-full bg-primary flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">coffee</span>
+                    </div>
+                    <h4 class="font-bold text-primary">Cold Coffee</h4>
+                    <span class="text-gold font-bold">₹25</span>
+                </div>
+                <div onclick="addToCart(14, 'Sweet Lassi', 30)" class="flex flex-col items-center text-center cursor-pointer group">
+                    <div class="size-16 rounded-full bg-primary flex items-center justify-center text-white mb-4 group-hover:scale-110 transition-transform">
+                        <span class="material-symbols-outlined text-3xl">local_drink</span>
+                    </div>
+                    <h4 class="font-bold text-primary">Sweet Lassi</h4>
+                    <span class="text-gold font-bold">₹30</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Cart Drawer -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300" onclick="toggleCart()"></div>
+<div id="cartDrawer" class="cart-drawer fixed top-0 right-0 h-full w-full md:w-[450px] bg-white dark:bg-background-dark z-[70] shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-primary/10 flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-primary flex items-center gap-3">
+            <span class="material-symbols-outlined">shopping_bag</span> Your Order
+        </h2>
+        <button onclick="toggleCart()" class="text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+    </div>
+    
+    <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Cart Items -->
+    </div>
+
+    <div class="p-6 border-t border-primary/10 bg-slate-50 dark:bg-slate-900/50">
+        <!-- User Info Form -->
+        <div id="cartForm" class="hidden mb-6 space-y-3 animate-in fade-in duration-300">
+            <h4 class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-2">Customer Details</h4>
+            <input type="text" id="custName" placeholder="Your Full Name" class="theme-input" required />
+            <input type="tel" id="custPhone" placeholder="Your Phone Number" class="theme-input" required />
+            <select id="deliveryType" class="theme-input">
+                <option value="Pickup">Self Pickup</option>
+                <option value="Delivery">Home Delivery</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-lg font-bold">Subtotal:</span>
+            <span id="cartTotal" class="text-2xl font-bold text-gold">₹0</span>
+        </div>
+        
+        <button id="orderBtn" onclick="sendOrder()" class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-xl shadow-whatsapp/20">
+            <span class="material-symbols-outlined">chat</span> Proceed to WhatsApp
+        </button>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-background-dark text-slate-400 py-12 border-t border-primary/20">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 text-center md:text-left">
+        <div>
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                <span class="material-symbols-outlined text-gold">temple_hindu</span>
+                <h1 class="text-xl font-bold text-white tracking-tight uppercase">RAJ MISTHAN</h1>
+            </div>
+            <p class="text-sm leading-relaxed max-w-xs mx-auto md:mx-0">Authentic royal taste since 1985. Premium ingredients and pure desi ghee delicacies.</p>
+        </div>
+        <div>
+            <h4 class="text-white font-bold mb-6 text-xs uppercase tracking-widest">Contact</h4>
+            <ul class="space-y-3 text-sm">
+                <li>Bus stand Jalsu, Jaipur, Rajasthan</li>
+                <li>+91 9587969804</li>
+                <li>order@rajmisthan.com</li>
+            </ul>
+        </div>
+        <div class="flex flex-col items-center md:items-end">
+            <a href="index.html" class="bg-primary/20 text-primary border border-primary px-8 py-2 rounded-full font-bold mb-6 hover:bg-primary hover:text-white transition-all">Back to Home</a>
+            <div class="flex gap-4">
+                <span class="material-symbols-outlined cursor-pointer hover:text-gold transition-colors">share</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-gold transition-colors">photo_camera</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const PHONE_NUMBER = "919587969804";
+    let cart = JSON.parse(localStorage.getItem('raj_cart_v2')) || [];
+
+    // --- UTILITIES ---
+    const generateWhatsAppLink = (items, total, info) => {
+        let msg = `Hello Raj Misthan Bhandar 👋\nI want to place an order:\n\n*Items:*\n`;
+        items.forEach(i => {
+            msg += `- ${i.name} (x${i.quantity}) – ₹${i.price * i.quantity}\n`;
+        });
+        msg += `\n*Total: ₹${total}*\n\n`;
+        msg += `*Name:* ${info.name}\n`;
+        msg += `*Phone:* ${info.phone}\n`;
+        msg += `*Pickup/Delivery:* ${info.type}`;
+        
+        return `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`;
+    };
+
+    // --- UI LOGIC ---
+    function toggleCart(forceOpen = null) {
+        const drawer = document.getElementById('cartDrawer');
+        const overlay = document.getElementById('cartOverlay');
+        const isOpen = forceOpen !== null ? forceOpen : drawer.classList.contains('open');
+        
+        if (isOpen && forceOpen !== true) {
+            drawer.classList.remove('open');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        } else {
+            drawer.classList.add('open');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateUI(); // Refresh UI when opening
+        }
+    }
+
+    function updateUI() {
+        const count = cart.reduce((acc, i) => acc + i.quantity, 0);
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+        
+        document.getElementById('cartCount').innerText = count;
+        document.getElementById('cartTotal').innerText = `₹${total}`;
+        
+        const itemsContainer = document.getElementById('cartItems');
+        const formContainer = document.getElementById('cartForm');
+
+        if (cart.length === 0) {
+            itemsContainer.innerHTML = `
+                <div class="h-full flex flex-col items-center justify-center opacity-40">
+                    <span class="material-symbols-outlined text-6xl mb-4">remove_shopping_cart</span>
+                    <p class="font-bold text-sm">Your cart is currently empty.</p>
+                </div>`;
+            formContainer.classList.add('hidden');
+            return;
+        }
+
+        formContainer.classList.remove('hidden');
+        itemsContainer.innerHTML = cart.map(item => `
+            <div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-xl border border-primary/5 shadow-sm">
+                <div class="flex-1">
+                    <h5 class="font-bold text-sm text-primary leading-tight">${item.name}</h5>
+                    <p class="text-[10px] text-gold font-bold">₹${item.price} ${item.unit || ''}</p>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10"><span class="material-symbols-outlined text-xs">remove</span></button>
+                    <span class="w-4 text-center text-xs font-bold">${item.quantity}</span>
+                    <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10"><span class="material-symbols-outlined text-xs">add</span></button>
+                </div>
+                <button onclick="removeItem(${item.id})" class="text-slate-300 hover:text-red-500"><span class="material-symbols-outlined text-lg">delete</span></button>
+            </div>
+        `).join('');
+    }
+
+    // --- CART ACTIONS ---
+    function addToCart(id, name, price, unit = '') {
+        const existing = cart.find(i => i.id === id);
+        if (existing) existing.quantity++;
+        else cart.push({ id, name, price, unit, quantity: 1 });
+        save();
+        updateUI();
+        toggleCart(true);
+    }
+
+    function removeItem(id) {
+        cart = cart.filter(i => i.id !== id);
+        save();
+        updateUI();
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.quantity = Math.max(1, item.quantity + delta);
+            save();
+            updateUI();
+        }
+    }
+
+    function save() {
+        localStorage.setItem('raj_cart_v2', JSON.stringify(cart));
+    }
+
+    // --- ORDER FLOW ---
+    function sendOrder() {
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const type = document.getElementById('deliveryType').value;
+
+        if (cart.length === 0) return;
+        if (!name || !phone) return alert("Please fill in your name and phone number to proceed.");
+
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+        const link = generateWhatsAppLink(cart, total, { name, phone, type });
+        window.open(link, '_blank');
+    }
+
+    // --- SEARCH LOGIC ---
+    document.getElementById('menuSearch').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        const cards = document.querySelectorAll('.menu-card');
+        const sections = document.querySelectorAll('.menu-section');
+
+        cards.forEach(card => {
+            const title = card.querySelector('h4').innerText.toLowerCase();
+            const desc = card.querySelector('p')?.innerText.toLowerCase() || "";
+            card.style.display = (title.includes(term) || desc.includes(term)) ? '' : 'none';
+        });
+
+        sections.forEach(sec => {
+            const hasVisibleItems = Array.from(sec.querySelectorAll('.menu-card')).some(c => c.style.display !== 'none');
+            const hasVisibleSmallItems = Array.from(sec.querySelectorAll('.cursor-pointer')).some(c => c.style.display !== 'none');
+            sec.style.display = (hasVisibleItems || hasVisibleSmallItems) ? '' : 'none';
+        });
+    });
+
+    // Handle small list items (Namkeen/Bakery) search
+    document.querySelectorAll('.menu-section .cursor-pointer').forEach(item => {
+        const observer = new MutationObserver(() => {}); // Not strictly needed, we handle it in main search
+    });
+
+    // Custom search for the list-based items
+    document.getElementById('menuSearch').addEventListener('input', function(e) {
+        const term = e.target.value.toLowerCase();
+        document.querySelectorAll('.menu-section .cursor-pointer').forEach(item => {
+            const title = item.querySelector('h5')?.innerText.toLowerCase() || "";
+            const desc = item.querySelector('p')?.innerText.toLowerCase() || "";
+            item.style.display = (title.includes(term) || desc.includes(term)) ? 'flex' : 'none';
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', updateUI);
+</script>
+
+</body>
+</html>

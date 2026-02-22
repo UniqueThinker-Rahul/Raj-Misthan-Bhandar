@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Raj Misthan Bhandar | Premium Catering &amp; Party Orders</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#bd0f0f",
+                        "gold": "#D4AF37",
+                        "cream": "#FDFBF7",
+                        "background-light": "#f8f6f6",
+                        "background-dark": "#221010",
+                        "whatsapp": "#25D366"
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        body { font-family: 'Work Sans', sans-serif; }
+        .gold-gradient {
+            background: linear-gradient(135deg, #D4AF37 0%, #F1D37E 50%, #D4AF37 100%);
+        }
+        .maroon-pattern {
+            background-color: #bd0f0f;
+            background-image: radial-gradient(#a30d0d 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        .cart-drawer {
+            transform: translateX(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .cart-drawer.open {
+            transform: translateX(0);
+        }
+        .theme-input {
+            @apply w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl p-4 focus:ring-2 focus:ring-primary/20 text-sm transition-all;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display antialiased">
+
+<!-- Top Navigation -->
+<header class="sticky top-0 z-50 w-full bg-white/95 dark:bg-background-dark/95 backdrop-blur-md border-b border-primary/10 shadow-sm">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="bg-primary p-2 rounded-lg">
+                <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z" fill="currentColor"></path>
+                </svg>
+            </div>
+            <div class="flex flex-col">
+                <h1 class="text-xl font-bold tracking-tight text-primary uppercase">Raj Misthan Bhandar</h1>
+                <span class="text-[10px] tracking-[0.3em] text-gold font-semibold uppercase">Est. 1984</span>
+            </div>
+        </div>
+        <nav class="hidden md:flex items-center gap-10">
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-sm font-semibold text-primary" href="catering.html">Catering</a>
+            <!-- <a class="text-sm font-semibold hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="gallery.html">Gallery</a> -->
+        </nav>
+        <div class="flex items-center gap-4">
+            <!-- Search Bar Integration -->
+            <div class="relative hidden lg:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input id="navSearch" class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 w-48 transition-all focus:w-64" placeholder="Search delicacies..." type="text"/>
+            </div>
+            <button onclick="toggleCart()" class="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-lg text-sm font-bold transition-all shadow-lg flex items-center gap-2">
+                <span id="cartCountBadge" class="bg-white text-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
+                Request Quote
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="relative min-h-[600px] flex items-center maroon-pattern overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAi09p8_5vWnhhlEO6wLDLxG7mq9iX8TQLAxdDsqfUv1myFnJaGXr13ffJ42rKHA4izhIY6GdTvnmi_Yve6k6wHg_Rx4oJ0mo8wgwgQAJTgF-u6LB3gpbt0L5YAx-K1FHqC6zQQfCBBy1gDKglUp7oUdR1YJ_9Oju4xnkr6NUpsyf5eCK1hEjVuP1hkN6KJAYOyn3b_anGlUy57IHvfUImwHRYsRLCfTiFWzqmwSsE80eY47QQr_N6821ZMGGp_X82SgS1ni8SrUab7');"></div>
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center relative z-10 py-20">
+            <div class="text-left space-y-8">
+                <div class="inline-block px-4 py-1 rounded-full bg-gold/20 border border-gold/30 text-gold text-xs font-bold tracking-widest uppercase">
+                    Premium Catering Services
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black text-white leading-tight">
+                    Catering &amp; <br/>
+                    <span class="text-gold">Party Orders</span>
+                </h1>
+                <p class="text-white/80 text-lg md:text-xl max-w-xl leading-relaxed">
+                    Fresh food handcrafted for birthdays, puja, and small family functions. Experience the authentic taste of tradition at your doorstep.
+                </p>
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <a href="tel:+919587969804" class="flex items-center gap-2 bg-primary border-2 border-gold text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-xl shadow-black/20">
+                        <span class="material-symbols-outlined">call</span> Call Now
+                    </a>
+                    <button onclick="window.open('https://wa.me/919587969804', '_blank')" class="flex items-center gap-2 bg-[#075E54] text-white px-8 py-4 rounded-xl font-bold hover:scale-105 transition-transform shadow-xl shadow-black/20">
+                        <span class="material-symbols-outlined">chat</span> WhatsApp Enquiry
+                    </button>
+                </div>
+            </div>
+            <div class="relative hidden lg:block">
+                <div class="absolute -inset-4 border-2 border-gold/30 rounded-full animate-pulse"></div>
+                <div class="w-full aspect-square rounded-full border-8 border-gold/20 overflow-hidden shadow-2xl">
+                    <img alt="Traditional Indian Sweets Platter" class="w-full h-full object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBrW1Bbqa0nrnm4DitIEdqiyNNkkjInEnH9kAOLiO1RN-7OCgDMawKNrfKLDwk8vnq5UF3dGj5du5g4mrZ5CJXR4Yx0HDTCwqoOOblmEqgTd9V3p6tirmTsBnmZeolbQcmy1ZJGDNyiNJdhTQwi3uAHpT_EHTv1ayir_0O9WftM6ss9M-662EOYk14d08jcQZmHOBEj1_KcCegB2VRlTiSJn0QQciXw7QlgFaP3pYV5MiJ7DEnMKPJICj-1WLQc_r_KJ6A0Vev7tJWC"/>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Offered -->
+    <section class="py-24 bg-white dark:bg-background-dark">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4 uppercase tracking-tight">Our Specialized Services</h2>
+                <div class="w-24 h-1 bg-primary mx-auto rounded-full"></div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="group p-8 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-gold transition-all bg-background-light dark:bg-slate-900/50 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-3xl">cake</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Birthdays</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Customized sweet boxes and party snacks for your little ones.</p>
+                </div>
+                <div class="group p-8 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-gold transition-all bg-background-light dark:bg-slate-900/50 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-3xl">temple_hindu</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Puja</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Pure Satvik meals and traditional offerings for auspicious rituals.</p>
+                </div>
+                <div class="group p-8 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-gold transition-all bg-background-light dark:bg-slate-900/50 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-3xl">groups</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Family Gatherings</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Intimate gatherings made special with our signature delicacies.</p>
+                </div>
+                <div class="group p-8 rounded-2xl border-2 border-slate-100 dark:border-slate-800 hover:border-gold transition-all bg-background-light dark:bg-slate-900/50 text-center">
+                    <div class="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-primary/10 text-primary group-hover:bg-primary group-hover:text-white transition-colors">
+                        <span class="material-symbols-outlined text-3xl">inventory_2</span>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Bulk Orders</h3>
+                    <p class="text-sm text-slate-500 dark:text-slate-400">Scalable catering solutions for corporate events and large parties.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catering Packages -->
+    <section class="py-24 bg-background-light dark:bg-background-dark/50">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-black text-slate-900 dark:text-white mb-4">Catering Packages</h2>
+                <p class="text-slate-500 max-w-2xl mx-auto">Choose from our curated menu selections or build your own custom feast.</p>
+            </div>
+            <div class="grid lg:grid-cols-3 gap-8 items-stretch">
+                <!-- Basic -->
+                <div class="bg-white dark:bg-slate-900 p-10 rounded-2xl border-2 border-slate-200 dark:border-slate-800 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Basic Party Pack</h3>
+                    <p class="text-slate-500 text-sm mb-6">Perfect for small morning gatherings</p>
+                    <div class="text-3xl font-black text-primary mb-8">₹249 <span class="text-sm font-normal text-slate-400">/ person</span></div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Traditional Kachori</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Signature Kadhi</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> 2 Varieties of Sweets</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Disposable Cutlery</li>
+                    </ul>
+                    <button onclick="addToCart(101, 'Basic Party Pack', 249)" class="w-full py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all active:scale-95">Select Basic</button>
+                </div>
+                <!-- Premium -->
+                <div class="bg-white dark:bg-slate-900 p-10 rounded-2xl border-4 border-gold relative shadow-2xl flex flex-col lg:scale-105 z-10">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-white px-6 py-1 rounded-full text-xs font-bold uppercase tracking-widest shadow-lg">Most Popular</div>
+                    <h3 class="text-2xl font-bold mb-2">Premium Party Pack</h3>
+                    <p class="text-slate-500 text-sm mb-6">Complete feast for grand celebrations</p>
+                    <div class="text-3xl font-black text-primary mb-8">₹499 <span class="text-sm font-normal text-slate-400">/ person</span></div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-gold text-sm">stars</span> 4 Types of Premium Snacks</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-gold text-sm">stars</span> 3 Types of Sweets</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-gold text-sm">stars</span> Celebration Cake</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-gold text-sm">stars</span> Premium Table Setup</li>
+                    </ul>
+                    <button onclick="addToCart(102, 'Premium Party Pack', 499)" class="w-full py-4 rounded-xl bg-primary text-white font-bold hover:shadow-lg transition-all active:scale-95">Select Premium</button>
+                </div>
+                <!-- Custom -->
+                <div class="bg-white dark:bg-slate-900 p-10 rounded-2xl border-2 border-slate-200 dark:border-slate-800 flex flex-col">
+                    <h3 class="text-2xl font-bold mb-2">Custom Menu</h3>
+                    <p class="text-slate-500 text-sm mb-6">Tailored to your specific preferences</p>
+                    <div class="text-3xl font-black text-primary mb-8">Flexible <span class="text-sm font-normal text-slate-400">Pricing</span></div>
+                    <ul class="space-y-4 mb-10 flex-grow">
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Unlimited Menu Choice</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Live Counter Options</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> Themed Decorations</li>
+                        <li class="flex items-center gap-3"><span class="material-symbols-outlined text-primary text-sm">check_circle</span> On-site Staff Service</li>
+                    </ul>
+                    <button onclick="document.getElementById('quoteFormSection').scrollIntoView({behavior: 'smooth'})" class="w-full py-4 rounded-xl border-2 border-primary text-primary font-bold hover:bg-primary hover:text-white transition-all active:scale-95">Contact for Quote</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Request a Quote Form -->
+    <section class="py-24 bg-cream" id="quoteFormSection">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white dark:bg-slate-900 rounded-3xl shadow-2xl p-10 md:p-16 border border-primary/5">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl font-black text-primary mb-4">Request a Quote</h2>
+                    <p class="text-slate-500">Fill in your details and our team will get back to you promptly.</p>
+                </div>
+                <form id="cateringQuoteForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Full Name</label>
+                        <input id="qName" class="theme-input" placeholder="Rahul Sharma" type="text" required/>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Phone Number</label>
+                        <input id="qPhone" class="theme-input" placeholder="+91 95879 69804" type="tel" required/>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Event Type</label>
+                        <select id="qEventType" class="theme-input">
+                            <option>Birthday Party</option>
+                            <option>Puja Ceremony</option>
+                            <option>Engagement / Wedding</option>
+                            <option>Corporate Bulk Order</option>
+                        </select>
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Number of Guests</label>
+                        <input id="qGuests" class="theme-input" placeholder="e.g. 50" type="number" required/>
+                    </div>
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Event Date</label>
+                        <input id="qDate" class="theme-input" type="date" required/>
+                    </div>
+                    <div class="space-y-2 md:col-span-2">
+                        <label class="text-xs font-bold uppercase tracking-widest text-slate-400">Your Message (Optional)</label>
+                        <textarea id="qMsg" class="theme-input resize-none" placeholder="Specific requirements or menu preferences..." rows="4"></textarea>
+                    </div>
+                    <div class="md:col-span-2 pt-6">
+                        <button type="submit" class="w-full bg-primary text-white py-5 rounded-2xl font-black text-lg hover:scale-[1.02] transition-transform shadow-xl shadow-primary/30 active:scale-95">
+                            Submit Inquiry on WhatsApp
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-background-dark text-white py-16 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12 text-center md:text-left">
+        <div class="col-span-1 md:col-span-2">
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                <svg class="w-8 h-8 text-primary" fill="currentColor" viewBox="0 0 48 48"><path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path></svg>
+                <h2 class="text-xl font-bold tracking-tight text-white uppercase">Raj Misthan Bhandar</h2>
+            </div>
+            <p class="text-slate-400 max-w-sm mx-auto md:mx-0 mb-8 leading-relaxed">Serving authentic Indian sweets and delicacies for over 4 decades. Our commitment to quality and purity makes every celebration unforgettable.</p>
+            <div class="flex justify-center md:justify-start gap-4">
+                <span class="material-symbols-outlined cursor-pointer hover:text-gold transition-colors">social_leaderboard</span>
+                <span class="material-symbols-outlined cursor-pointer hover:text-gold transition-colors">share_reviews</span>
+            </div>
+        </div>
+        <div>
+            <h4 class="font-bold mb-6 text-gold uppercase tracking-widest text-xs">Explore</h4>
+            <ul class="space-y-4 text-slate-400 text-sm font-medium">
+                <li><a class="hover:text-white transition-colors" href="menu.html">Menu Selection</a></li>
+                <li><a class="hover:text-white transition-colors" href="gallery.html">Event Gallery</a></li>
+                <li><a class="hover:text-white transition-colors" href="contact.html">Store Locator</a></li>
+            </ul>
+        </div>
+        <div>
+            <h4 class="font-bold mb-6 text-gold uppercase tracking-widest text-xs">Contact Us</h4>
+            <ul class="space-y-4 text-slate-400 text-sm">
+                <li>Bus stand Jalsu, Jaipur</li>
+                <li>+91 9587969804</li>
+                <li>order@rajmisthan.com</li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Drawer (Shared Context) -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[60] hidden" onclick="toggleCart()"></div>
+<div id="cartDrawer" class="cart-drawer fixed top-0 right-0 h-full w-full md:w-[450px] bg-white dark:bg-background-dark z-[70] shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-primary/10 flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-primary flex items-center gap-3 uppercase">
+            <span class="material-symbols-outlined">shopping_bag</span> Your Order
+        </h2>
+        <button onclick="toggleCart()" class="text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+    </div>
+    
+    <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Dynamic Content -->
+    </div>
+
+    <div class="p-6 border-t border-primary/10 bg-slate-50 dark:bg-slate-900/50">
+        <div id="orderForm" class="hidden mb-6 space-y-3">
+            <input type="text" id="custName" placeholder="Full Name" class="theme-input" required />
+            <input type="tel" id="custPhone" placeholder="Phone Number" class="theme-input" required />
+            <select id="deliveryType" class="theme-input">
+                <option value="Self Pickup">Self Pickup</option>
+                <option value="Delivery">Event Delivery</option>
+            </select>
+        </div>
+
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-lg font-bold">Subtotal:</span>
+            <span id="cartTotal" class="text-2xl font-bold text-gold">₹0</span>
+        </div>
+        
+        <button onclick="sendOrder()" class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-all shadow-xl shadow-whatsapp/20">
+            <span class="material-symbols-outlined">chat</span> Proceed on WhatsApp
+        </button>
+    </div>
+</div>
+
+<script>
+    const SHOP_PHONE = "919587969804";
+    let cart = JSON.parse(localStorage.getItem('raj_cart_state')) || [];
+
+    // --- CART LOGIC ---
+    function toggleCart(forceOpen = null) {
+        const drawer = document.getElementById('cartDrawer');
+        const overlay = document.getElementById('cartOverlay');
+        const isOpen = forceOpen !== null ? forceOpen : drawer.classList.contains('open');
+        
+        if (isOpen && forceOpen !== true) {
+            drawer.classList.remove('open');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        } else {
+            drawer.classList.add('open');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateCartUI();
+        }
+    }
+
+    function addToCart(id, name, price) {
+        const existing = cart.find(i => i.id === id);
+        if (existing) existing.quantity++;
+        else cart.push({ id, name, price, quantity: 1 });
+        saveCart();
+        toggleCart(true);
+    }
+
+    function updateQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.quantity = Math.max(1, item.quantity + delta);
+            saveCart();
+        }
+    }
+
+    function removeFromCart(id) {
+        cart = cart.filter(i => i.id !== id);
+        saveCart();
+    }
+
+    function saveCart() {
+        localStorage.setItem('raj_cart_state', JSON.stringify(cart));
+        updateCartUI();
+    }
+
+    function updateCartUI() {
+        const count = cart.reduce((acc, i) => acc + i.quantity, 0);
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+        
+        document.getElementById('cartCountBadge').innerText = count;
+        document.getElementById('cartTotal').innerText = `₹${total}`;
+        
+        const container = document.getElementById('cartItems');
+        const form = document.getElementById('orderForm');
+
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="h-full flex flex-col items-center justify-center opacity-40"><span class="material-symbols-outlined text-6xl mb-4">shopping_basket</span><p class="text-sm font-bold">No items selected.</p></div>`;
+            form.classList.add('hidden');
+        } else {
+            form.classList.remove('hidden');
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-xl border border-primary/5 shadow-sm">
+                    <div class="flex-1">
+                        <h5 class="font-bold text-sm text-primary uppercase tracking-tight">${item.name}</h5>
+                        <p class="text-[10px] text-gold font-bold">₹${item.price} x ${item.quantity}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="updateQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-xs">remove</span></button>
+                        <span class="w-4 text-center text-xs font-bold">${item.quantity}</span>
+                        <button onclick="updateQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-xs">add</span></button>
+                    </div>
+                    <button onclick="removeFromCart(${item.id})" class="text-slate-300 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+                </div>
+            `).join('');
+        }
+    }
+
+    function sendOrder() {
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const type = document.getElementById('deliveryType').value;
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+
+        if (cart.length === 0) return;
+        if (!name || !phone) return alert("Please fill in your details.");
+
+        let msg = `Hello Raj Misthan Bhandar 👋\nI want to place an order:\n\n*Items:*\n`;
+        cart.forEach(i => {
+            msg += `- ${i.name} (x${i.quantity}) – ₹${i.price * i.quantity}\n`;
+        });
+        msg += `\n*Total: ₹${total}*\n*Name:* ${name}\n*Phone:* ${phone}\n*Type:* ${type}`;
+        
+        window.open(`https://wa.me/${SHOP_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // --- QUOTE FORM LOGIC ---
+    document.getElementById('cateringQuoteForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const name = document.getElementById('qName').value;
+        const phone = document.getElementById('qPhone').value;
+        const event = document.getElementById('qEventType').value;
+        const guests = document.getElementById('qGuests').value;
+        const date = document.getElementById('qDate').value;
+        const extra = document.getElementById('qMsg').value;
+
+        const msg = `*New Catering Inquiry - Raj Misthan Bhandar*\n\n` +
+                    `*Name:* ${name}\n` +
+                    `*Phone:* ${phone}\n` +
+                    `*Event:* ${event}\n` +
+                    `*Guests:* ${guests}\n` +
+                    `*Date:* ${date}\n` +
+                    `*Details:* ${extra || 'N/A'}`;
+
+        window.open(`https://wa.me/${SHOP_PHONE}?text=${encodeURIComponent(msg)}`, '_blank');
+    });
+
+    // --- NAVIGATION SEARCH ---
+    document.getElementById('navSearch').addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            window.location.href = `menu.html?search=${encodeURIComponent(this.value)}`;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', updateCartUI);
+</script>
+
+<!-- WhatsApp Floating Button -->
+<a class="fixed bottom-8 right-8 w-16 h-16 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-2xl hover:scale-110 transition-transform z-50" href="https://wa.me/919587969804" aria-label="Chat on WhatsApp">
+    <span class="material-symbols-outlined text-4xl">chat</span>
+</a>
+
+</body>
+</html>

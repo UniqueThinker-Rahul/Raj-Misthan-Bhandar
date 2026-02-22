@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Raj Misthan Bhandar - Video & Image Gallery</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#bd0f0f",
+                        "accent-gold": "#d4af37",
+                        "background-light": "#fdfaf6",
+                        "background-dark": "#221010",
+                        "whatsapp": "#25D366"
+                    },
+                    fontFamily: {
+                        "display": ["Work Sans", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .masonry-grid {
+                columns: 1;
+                gap: 1.5rem;
+            }
+            @media (min-width: 640px) { .masonry-grid { columns: 2; } }
+            @media (min-width: 1024px) { .masonry-grid { columns: 3; } }
+            .gallery-item {
+                break-inside: avoid;
+                margin-bottom: 1.5rem;
+                transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .gallery-item:hover {
+                transform: scale(1.02);
+                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .motif-bg {
+                background-image: radial-gradient(circle at 2px 2px, rgba(212, 175, 55, 0.1) 1px, transparent 0);
+                background-size: 24px 24px;
+            }
+            .video-glow:hover .play-icon {
+                filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.8));
+            }
+            .cart-drawer {
+                transform: translateX(100%);
+                transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            .cart-drawer.open {
+                transform: translateX(0);
+            }
+        }
+        .theme-input {
+            @apply w-full bg-white dark:bg-slate-800 border-slate-200 dark:border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all;
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display min-h-screen">
+
+<header class="sticky top-0 z-50 bg-background-light/90 dark:bg-background-dark/90 backdrop-blur-md border-b border-primary/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+        <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='index.html'">
+            <div class="text-primary">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 48 48">
+                    <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path>
+                </svg>
+            </div>
+            <h1 class="text-xl font-bold tracking-tight text-primary uppercase">Raj Misthan Bhandar</h1>
+        </div>
+        <nav class="hidden md:flex items-center gap-8">
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="index.html">Home</a>
+            <a class="text-sm font-semibold text-primary border-b-2 border-primary" href="gallery.html">Gallery</a>
+            <!-- <a class="text-sm font-semibold hover:text-primary transition-colors" href="menu.html">Menu</a>
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="catering.html">Catering</a>
+            <a class="text-sm font-semibold hover:text-primary transition-colors" href="contact.html">Contact</a> -->
+        </nav>
+        <div class="flex items-center gap-4">
+            <!-- Search Bar -->
+            <div class="relative hidden lg:block">
+                <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                <input id="gallerySearch" class="pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-full text-sm focus:ring-2 focus:ring-primary/20 w-64" placeholder="Search gallery..." type="text"/>
+            </div>
+            <button onclick="toggleCart()" class="bg-primary text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
+                <span id="cartCountBadge" class="bg-white text-primary text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">0</span>
+                Order Now
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- Hero Section -->
+    <section class="relative py-20 motif-bg overflow-hidden">
+        <div class="max-w-4xl mx-auto text-center px-6 relative z-10">
+            <div class="inline-block mb-4">
+                <span class="material-symbols-outlined text-accent-gold text-4xl">flare</span>
+            </div>
+            <h2 class="text-5xl md:text-6xl font-bold text-primary mb-6 font-serif">Our Gallery</h2>
+            <p class="text-xl text-slate-600 dark:text-slate-400 max-w-2xl mx-auto leading-relaxed">
+                A glimpse of our shop, sweets & celebrations. Experience the legacy of authentic Indian flavors through our lens.
+            </p>
+            <div class="mt-8 w-24 h-1 bg-accent-gold mx-auto rounded-full"></div>
+        </div>
+    </section>
+
+    <!-- Filter Navigation -->
+    <section class="sticky top-20 z-40 bg-background-light dark:bg-background-dark py-4 border-b border-primary/5">
+        <div class="max-w-7xl mx-auto px-6 overflow-x-auto">
+            <div class="flex items-center justify-center gap-8 min-w-max" id="filterContainer">
+                <button data-filter="all" class="filter-btn group relative py-2 px-1 text-sm font-bold text-primary">
+                    All
+                    <span class="indicator absolute bottom-0 left-0 w-full h-0.5 bg-accent-gold"></span>
+                </button>
+                <button data-filter="shop" class="filter-btn group relative py-2 px-1 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    Shop
+                    <span class="indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-300"></span>
+                </button>
+                <button data-filter="sweets" class="filter-btn group relative py-2 px-1 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    Sweets
+                    <span class="indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-300"></span>
+                </button>
+                <button data-filter="snacks" class="filter-btn group relative py-2 px-1 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    Snacks
+                    <span class="indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-300"></span>
+                </button>
+                <button data-filter="bakery" class="filter-btn group relative py-2 px-1 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    Bakery
+                    <span class="indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-300"></span>
+                </button>
+                <button data-filter="catering" class="filter-btn group relative py-2 px-1 text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-primary transition-colors">
+                    Catering Events
+                    <span class="indicator absolute bottom-0 left-0 w-0 h-0.5 bg-accent-gold transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Grid -->
+    <section class="max-w-7xl mx-auto px-6 py-12">
+        <div class="masonry-grid" id="galleryGrid">
+            <!-- Shop -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="shop">
+                <img alt="Interior of a luxury Indian sweet shop with gold lighting" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO0_MIZR1Vfla6He8Bv-kOCSCVrrweEI1vJNQG4vtLREUtdjH4iJhdryjEYmTfuyfJWtBf0Mfe-PXehI4MUYFAKBjJZsXwDtpXuiE02Z846pu-Mn7kGTz-cGaI2Sfq4NXOnibY0SlvuY_7xL2aNkwg1Yngt7Zo0aDmIZL33WOjlENXeqYyIPg9M1g14ahv-ezB3tphAST3edHDA9ui-yvnRq-j78JyzvDEqhPFaBfjpA51eICmdmmX6zSF_dT8iWBOwMKKYIGmL7P1"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Shop Interior</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Elegant Display Counters</h3>
+                </div>
+            </div>
+            <!-- Sweets -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="sweets">
+                <img alt="Close up of Kaju Katli silver leaf sweets" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJTRlQDcHkthRJ2SNrZ1rJwakQG459HIQ2ruwNsdehe27zLyE-6RfoYSy7-YkmJAeq-Q92wFf3Q4IbjiI-iKhvnFd_v45IWqjNTGKq0LyA7CpPo-7_DP4Kb7smddwx34LWGy6YcXbGd3w1b3gY7SLmPSdaonI2fna3z9uXy7x5XScvTyNRGIrHNW4MGbNf1trmyeiT7fVqpxg_HHzUs2hHpci29HI29bTRihXw2cqGRvwhWZwXM1pjgdIviz0PyEpSti-KsVaIyraH"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Sweets</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Premium Kaju Katli</h3>
+                </div>
+            </div>
+            <!-- Catering -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="catering">
+                <img alt="Traditional wedding buffet catering setup" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfqdrd9Vz85NJnbhiJoSV8SA8_AEheJXwLrYBTbP0nn7i-PGSQU6KMTorIPkL_R2eXkq3jOPFF50VxxUwhZor4OS791AQPlFBlsdRblGhcwal3ZgLwYYZQK4ML1KDyeBx08yQtOPQmffjqd6g4wCiqB3N3NQleWh3ZwNKEWQItv4Fr0J9csd9svMVyHE1Bq37xtqRSlPpR2i_JOsmYNh0AJ1J5c9G99YKlUgsXI1G6hBsbN25t6Q4jkiLEBg4JeNwDznL9xQKAi3Gf"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Catering</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Wedding Celebration Feast</h3>
+                </div>
+            </div>
+            <!-- Snacks -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="snacks">
+                <img alt="Steaming hot kachoris served on a plate" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD2aiBf7PpXOLSJAAOFDQN8CklWI5vLS3x7_7YfZYaFJ1OvuXelArq5siObDlFJKbeRL-9bVUGqSifJRCBmCUCY6C8JJRCmHAxQb3Hi6LnHUvijhlo4DNxcQFt-k2mXSWQX-XHrlugyxURUqCjjfZIlaeCnvEAARwCvRH-7wlDBs9K4-HK8uF9GCclTzLvOG4w72SToPONF6d3bx5vbPD0IzMLFmACPLfPBuxq_vY8SOfrtAf--ZNCIEguRac_ZK_LHPi1ORbFiglzK"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Snacks</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Crispy Morning Kachoris</h3>
+                </div>
+            </div>
+            <!-- Bakery -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="bakery">
+                <img alt="Tiered designer cake with floral patterns" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPkR3Ui8O57yFR6fl2nOyZg91-x_5c1bruh6zyN6y--KVp1fuNmoSNf6rLHn64e66rLMcr9B9eBunkeegKkcgxpMSr-jov7sEs7Pxl7o0Su_GfBu29wrvkefZvsg41-6B8aYP8unecDSXontBVsbsN0wRNSRSt5YlySRbX2pah6sd00mDiDN4p7Qg-rlW4LZIHEG_f7hRyKhRD7JBDiruJzToa0OzD58pmFMe7DvWmCT7EIpDuf9Nv_v-d7BvNSr5JB6n1ExI5nQoy"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Bakery</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Custom Celebration Cakes</h3>
+                </div>
+            </div>
+            <!-- Sweets 2 -->
+            <div class="gallery-item overflow-hidden rounded-xl bg-slate-100 dark:bg-slate-800" data-category="sweets">
+                <img alt="Golden brown Gulab Jamuns in syrup" class="w-full h-auto object-cover" loading="lazy" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQFtNgbnpHos3OBfsHn_6Kh8UocvhVOxb9oloKosOtDDbaEsHXSJEGKEHytmU4Me2F-gDGJgD-PhcVEXsqiFiH4-FYzwGGcvPZuwjI1InWmgL041bE5kD1oSsSh6lDm_TR-Eu6fBYZnwRiKAxeRuRiQolq1VF7aAZIdWXDF2qVd8cx_t0ucYsF7Y2KEQBMMmmH4rjdQCuCIkEAjWKnVN9MYXZWeaKsm-YjX2CfO_HbC-D6ytQDI-08qJ8gtpUuhwx1ruAh8Iew0SUq"/>
+                <div class="p-4 bg-white dark:bg-slate-900">
+                    <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Sweets</span>
+                    <h3 class="text-sm font-bold text-slate-900 dark:text-slate-100">Hot Gulab Jamuns</h3>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section class="max-w-7xl mx-auto px-6 py-16 border-t border-primary/10">
+        <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-4">Shop Tours & Behind the Scenes</h2>
+            <div class="w-24 h-1 bg-accent-gold mx-auto rounded-full"></div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Video Item 1 -->
+            <div class="group relative cursor-pointer video-glow transition-transform duration-500 hover:scale-[1.02]" onclick="openVideo('Morning Prep - Our Fresh Kitchen')">
+                <div class="aspect-video relative overflow-hidden rounded-2xl bg-slate-900">
+                    <img alt="Morning Prep thumbnail" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDO0_MIZR1Vfla6He8Bv-kOCSCVrrweEI1vJNQG4vtLREUtdjH4iJhdryjEYmTfuyfJWtBf0Mfe-PXehI4MUYFAKBjJZsXwDtpXuiE02Z846pu-Mn7kGTz-cGaI2Sfq4NXOnibY0SlvuY_7xL2aNkwg1Yngt7Zo0aDmIZL33WOjlENXeqYyIPg9M1g14ahv-ezB3tphAST3edHDA9ui-yvnRq-j78JyzvDEqhPFaBfjpA51eICmdmmX6zSF_dT8iWBOwMKKYIGmL7P1"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                        <div class="play-icon w-20 h-20 rounded-full bg-accent-gold/20 flex items-center justify-center backdrop-blur-sm border-2 border-accent-gold/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-accent-gold text-5xl fill-1">play_arrow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Behind the Scenes</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Morning Prep - Our Fresh Kitchen</h3>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-400">videocam</span>
+                </div>
+            </div>
+            <!-- Video Item 2 -->
+            <div class="group relative cursor-pointer video-glow transition-transform duration-500 hover:scale-[1.02]" onclick="openVideo('Shop Tour - A Sweet Experience')">
+                <div class="aspect-video relative overflow-hidden rounded-2xl bg-slate-900">
+                    <img alt="Shop Tour thumbnail" class="w-full h-full object-cover opacity-80" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJTRlQDcHkthRJ2SNrZ1rJwakQG459HIQ2ruwNsdehe27zLyE-6RfoYSy7-YkmJAeq-Q92wFf3Q4IbjiI-iKhvnFd_v45IWqjNTGKq0LyA7CpPo-7_DP4Kb7smddwx34LWGy6YcXbGd3w1b3gY7SLmPSdaonI2fna3z9uXy7x5XScvTyNRGIrHNW4MGbNf1trmyeiT7fVqpxg_HHzUs2hHpci29HI29bTRihXw2cqGRvwhWZwXM1pjgdIviz0PyEpSti-KsVaIyraH"/>
+                    <div class="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                        <div class="play-icon w-20 h-20 rounded-full bg-accent-gold/20 flex items-center justify-center backdrop-blur-sm border-2 border-accent-gold/50 transition-all duration-300">
+                            <span class="material-symbols-outlined text-accent-gold text-5xl fill-1">play_arrow</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4 flex items-center justify-between">
+                    <div>
+                        <span class="text-[10px] uppercase tracking-widest text-accent-gold font-bold">Shop Tour</span>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-slate-100">Shop Tour - A Sweet Experience</h3>
+                    </div>
+                    <span class="material-symbols-outlined text-slate-400">explore</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Order CTA -->
+    <section class="mt-20 py-16 bg-primary text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 motif-bg"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-bold mb-8 font-serif">Loved our food? Order on WhatsApp</h2>
+            <div class="flex flex-col md:flex-row items-center justify-center gap-6">
+                <button onclick="toggleCart(true)" class="bg-white text-primary px-10 py-4 rounded-full font-bold text-lg flex items-center gap-3 hover:bg-slate-50 transition-all transform hover:scale-105 shadow-2xl">
+                    <svg class="w-6 h-6 fill-[#25D366]" viewBox="0 0 24 24">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"></path>
+                    </svg>
+                    Message on WhatsApp
+                </button>
+                <div class="flex items-center gap-2 text-white/80">
+                    <span class="material-symbols-outlined text-accent-gold">verified_user</span>
+                    <span class="text-sm font-medium">Quick Delivery & Support</span>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer class="bg-background-dark text-white py-12 px-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-12">
+        <div class="col-span-1 md:col-span-2 text-center md:text-left">
+            <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                <div class="text-white">
+                    <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 48 48">
+                        <path d="M4 4H17.3334V17.3334H30.6666V30.6666H44V44H4V4Z"></path>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold tracking-tight text-white uppercase">Raj Misthan Bhandar</h2>
+            </div>
+            <p class="text-slate-400 max-w-sm mx-auto md:mx-0 mb-6">
+                Delivering sweetness and tradition across generations. Experience the authentic taste of Rajasthan in every bite.
+            </p>
+            <div class="flex justify-center md:justify-start gap-4">
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+                    <span class="material-symbols-outlined text-sm">share</span>
+                </a>
+                <a class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary transition-colors" href="#">
+                    <span class="material-symbols-outlined text-sm">thumb_up</span>
+                </a>
+            </div>
+        </div>
+        <div class="text-center md:text-left">
+            <h4 class="font-bold mb-6 text-accent-gold uppercase tracking-widest text-xs">Explore</h4>
+            <ul class="space-y-4 text-slate-400 text-sm">
+                <li><a class="hover:text-white transition-colors" href="gallery.html">Our Story</a></li>
+                <li><a class="hover:text-white transition-colors" href="menu.html">Product Menu</a></li>
+                <li><a class="hover:text-white transition-colors" href="catering.html">Catering Packages</a></li>
+                <li><a class="hover:text-white transition-colors" href="#">Store Locator</a></li>
+            </ul>
+        </div>
+        <div class="text-center md:text-left">
+            <h4 class="font-bold mb-6 text-accent-gold uppercase tracking-widest text-xs">Contact</h4>
+            <ul class="space-y-4 text-slate-400 text-sm">
+                <li class="flex items-start justify-center md:justify-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-lg">location_on</span>
+                    <span>Bus stand jalsu, Jaipur, Rajasthan</span>
+                </li>
+                <li class="flex items-center justify-center md:justify-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-lg">call</span>
+                    <span>+91 9587969804</span>
+                </li>
+                <li class="flex items-center justify-center md:justify-start gap-3">
+                    <span class="material-symbols-outlined text-primary text-lg">mail</span>
+                    <span>info@rajmisthan.com</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="max-w-7xl mx-auto mt-12 pt-8 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+        <p>© 2024 Raj Misthan Bhandar. All rights reserved.</p>
+        <div class="flex gap-6">
+            <a class="hover:text-white transition-colors" href="#">Privacy Policy</a>
+            <a class="hover:text-white transition-colors" href="#">Terms of Service</a>
+        </div>
+    </div>
+</footer>
+
+<!-- Cart Drawer (Synced with Menu) -->
+<div id="cartOverlay" class="fixed inset-0 bg-black/50 z-[60] hidden transition-opacity duration-300" onclick="toggleCart()"></div>
+<div id="cartDrawer" class="cart-drawer fixed top-0 right-0 h-full w-full md:w-[450px] bg-white dark:bg-background-dark z-[70] shadow-2xl flex flex-col">
+    <div class="p-6 border-b border-primary/10 flex items-center justify-between">
+        <h2 class="text-2xl font-bold text-primary flex items-center gap-3">
+            <span class="material-symbols-outlined">shopping_bag</span> Your Order
+        </h2>
+        <button onclick="toggleCart()" class="text-slate-400 hover:text-primary transition-colors">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+    </div>
+    <div id="cartItems" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <!-- Dynamically rendered -->
+    </div>
+    <div class="p-6 border-t border-primary/10 bg-slate-50 dark:bg-slate-900/50">
+        <div id="cartForm" class="hidden mb-6 space-y-3">
+            <input type="text" id="custName" placeholder="Full Name" class="theme-input" required />
+            <input type="tel" id="custPhone" placeholder="Phone Number" class="theme-input" required />
+            <select id="deliveryType" class="theme-input">
+                <option value="Pickup">Self Pickup</option>
+                <option value="Delivery">Home Delivery</option>
+            </select>
+        </div>
+        <div class="flex justify-between items-center mb-6">
+            <span class="text-lg font-bold">Subtotal:</span>
+            <span id="cartTotal" class="text-2xl font-bold text-accent-gold">₹0</span>
+        </div>
+        <button onclick="sendOrder()" class="w-full bg-whatsapp text-white py-4 rounded-xl font-bold text-lg flex items-center justify-center gap-3 hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined">chat</span> Order on WhatsApp
+        </button>
+    </div>
+</div>
+
+<!-- Video Playback Modal -->
+<div id="videoModal" class="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl hidden flex items-center justify-center p-6">
+    <div class="max-w-5xl w-full relative">
+        <button onclick="closeVideo()" class="absolute -top-12 right-0 text-white/50 hover:text-white transition-colors">
+            <span class="material-symbols-outlined text-4xl">close</span>
+        </button>
+        <div class="border-4 border-accent-gold rounded-2xl overflow-hidden aspect-video bg-black shadow-[0_0_50px_rgba(212,175,55,0.3)]">
+            <div class="w-full h-full flex items-center justify-center relative">
+                <img id="modalThumb" alt="Placeholder" class="absolute inset-0 w-full h-full object-cover opacity-60" src=""/>
+                <div class="z-10 flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full bg-accent-gold flex items-center justify-center shadow-lg shadow-accent-gold/50">
+                        <span class="material-symbols-outlined text-white text-6xl fill-1">play_arrow</span>
+                    </div>
+                    <p id="modalTitle" class="text-white font-serif text-2xl mt-6 tracking-wide text-center px-4"></p>
+                </div>
+            </div>
+        </div>
+        <div class="mt-6 flex justify-between items-center">
+            <div class="flex gap-4">
+                <button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10">
+                    <span class="material-symbols-outlined">favorite</span>
+                </button>
+                <button class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center text-white hover:bg-white/10">
+                    <span class="material-symbols-outlined">share</span>
+                </button>
+            </div>
+            <div class="px-6 py-2 rounded-full bg-accent-gold/10 border border-accent-gold text-accent-gold text-sm font-bold uppercase tracking-widest">
+                Exclusive View
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- STATE MANAGEMENT ---
+    let cart = JSON.parse(localStorage.getItem('raj_cart_state')) || [];
+    const PHONE_NUMBER = "919587969804";
+
+    // --- GALLERY FILTERING & SEARCH ---
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    const searchInput = document.getElementById('gallerySearch');
+
+    function applyFilters() {
+        const activeFilter = document.querySelector('.filter-btn.text-primary').dataset.filter;
+        const searchTerm = searchInput.value.toLowerCase();
+
+        galleryItems.forEach(item => {
+            const category = item.dataset.category;
+            const title = item.querySelector('h3').innerText.toLowerCase();
+            const matchesFilter = activeFilter === 'all' || category === activeFilter;
+            const matchesSearch = title.includes(searchTerm);
+
+            if (matchesFilter && matchesSearch) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Update active states
+            filterButtons.forEach(b => {
+                b.classList.remove('text-primary', 'font-bold');
+                b.classList.add('text-slate-500', 'dark:text-slate-400', 'font-medium');
+                b.querySelector('.indicator').style.width = '0';
+            });
+            btn.classList.add('text-primary', 'font-bold');
+            btn.classList.remove('text-slate-500', 'dark:text-slate-400', 'font-medium');
+            btn.querySelector('.indicator').style.width = '100%';
+            applyFilters();
+        });
+    });
+
+    searchInput.addEventListener('input', applyFilters);
+
+    // --- CART DRAWER LOGIC ---
+    function toggleCart(forceOpen = null) {
+        const drawer = document.getElementById('cartDrawer');
+        const overlay = document.getElementById('cartOverlay');
+        const isOpen = forceOpen !== null ? forceOpen : drawer.classList.contains('open');
+        
+        if (isOpen && forceOpen !== true) {
+            drawer.classList.remove('open');
+            overlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        } else {
+            drawer.classList.add('open');
+            overlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            updateCartUI();
+        }
+    }
+
+    function updateCartUI() {
+        const count = cart.reduce((acc, i) => acc + i.quantity, 0);
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+        
+        document.getElementById('cartCountBadge').innerText = count;
+        document.getElementById('cartTotal').innerText = `₹${total}`;
+        
+        const container = document.getElementById('cartItems');
+        const form = document.getElementById('cartForm');
+
+        if (cart.length === 0) {
+            container.innerHTML = `<div class="h-full flex flex-col items-center justify-center opacity-40 text-center"><span class="material-symbols-outlined text-6xl mb-4">remove_shopping_cart</span><p class="font-bold">Cart is empty.</p></div>`;
+            form.classList.add('hidden');
+        } else {
+            form.classList.remove('hidden');
+            container.innerHTML = cart.map(item => `
+                <div class="flex items-center gap-4 bg-white dark:bg-slate-800 p-4 rounded-xl border border-primary/5 shadow-sm">
+                    <div class="flex-1 min-w-0">
+                        <h5 class="font-bold text-sm text-primary truncate">${item.name}</h5>
+                        <p class="text-[10px] text-accent-gold font-bold">₹${item.price}</p>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="changeQty(${item.id}, -1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-xs">remove</span></button>
+                        <span class="w-4 text-center text-xs font-bold">${item.quantity}</span>
+                        <button onclick="changeQty(${item.id}, 1)" class="w-6 h-6 flex items-center justify-center rounded bg-slate-100 dark:bg-slate-700 hover:bg-primary/10 transition-colors"><span class="material-symbols-outlined text-xs">add</span></button>
+                    </div>
+                    <button onclick="removeItem(${item.id})" class="text-slate-300 hover:text-red-500 transition-colors"><span class="material-symbols-outlined text-lg">delete</span></button>
+                </div>
+            `).join('');
+        }
+    }
+
+    function removeItem(id) {
+        cart = cart.filter(i => i.id !== id);
+        save();
+        updateCartUI();
+    }
+
+    function changeQty(id, delta) {
+        const item = cart.find(i => i.id === id);
+        if (item) {
+            item.quantity = Math.max(1, item.quantity + delta);
+            save();
+            updateCartUI();
+        }
+    }
+
+    function save() {
+        localStorage.setItem('raj_cart_state', JSON.stringify(cart));
+    }
+
+    // --- WHATSAPP ORDER FLOW ---
+    function sendOrder() {
+        const name = document.getElementById('custName').value.trim();
+        const phone = document.getElementById('custPhone').value.trim();
+        const type = document.getElementById('deliveryType').value;
+        const total = cart.reduce((acc, i) => acc + (i.price * i.quantity), 0);
+
+        if (cart.length === 0) return alert("Your cart is empty.");
+        if (!name || !phone) return alert("Please fill in your name and phone number.");
+
+        let msg = `Hello Raj Misthan Bhandar 👋\nI want to place an order:\n\n*Items:*\n`;
+        cart.forEach(i => {
+            msg += `- ${i.name} x${i.quantity} – ₹${i.price * i.quantity}\n`;
+        });
+        msg += `\n*Total: ₹${total}*\n`;
+        msg += `*Name:* ${name}\n`;
+        msg += `*Phone:* ${phone}\n`;
+        msg += `*Pickup/Delivery:* ${type}`;
+
+        window.open(`https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`, '_blank');
+    }
+
+    // --- VIDEO MODAL LOGIC ---
+    function openVideo(title) {
+        document.getElementById('modalTitle').innerText = `Playing: ${title}`;
+        document.getElementById('videoModal').classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeVideo() {
+        document.getElementById('videoModal').classList.add('hidden');
+        document.body.style.overflow = '';
+    }
+
+    // Initialize UI on load
+    document.addEventListener('DOMContentLoaded', updateCartUI);
+</script>
+
+</body>
+</html>
